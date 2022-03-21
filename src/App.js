@@ -7,7 +7,6 @@ function App() {
       <div className='Selfinfor'>
         <Self/>
       </div>
-      <div className='CV'></div>
       <div className='Experience'></div>
       <div className='Projects'></div>
       <div className='Study'></div>

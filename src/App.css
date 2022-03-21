@@ -1,3 +1,6 @@
+*{
+    /* border: solid 1px blueviolet; */
+}
 .App {
   position: relative;
   width: 100%;
@@ -12,15 +15,32 @@
 }
 .CardBox{
   position: relative;
+}
+.Information{
+  position: relative;
   display: flex;
+
 }
 .intorduce{
-  width: 35vw;
+  width: 20vw;
   text-align: center;
   padding-top: 3vh;
+  margin-left: 8vw;
+
 }
 .photo{
   position: relative;
+  border-radius: 200px;
   width: 200px;
   height: 200px;
+  bottom: 8px;
+  border: solid 1px black;  
+
+}
+.CV{
+  position: relative;
+  width: 50vw;
+  top: 10vh ;
+  height: fit-content;
+  margin: 0 auto;
 }
