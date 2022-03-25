@@ -1,47 +1,67 @@
 *{
+  -ms-overflow-style: none;
     /* border: solid 1px blueviolet; */
 }
+::-webkit-scrollbar {
+  display: none;
+}
 .App {
-  position: relative;
   width: 100%;
   height: 100%;
-  margin: 0 auto;
-  background-color: #dddfe6 ;
+  background-color: rgb(226, 232, 255) ;
 }
 .Selfinfor{
   position: relative;
   width: 50vw;
-  top: 5vh;
+  margin: auto;
   height: fit-content;
-  margin: 0 auto;
 }
 .CardBox{
   position: relative;
-  background-color: rgb(241, 240, 240);
+  margin: 0 auto;
+  background-color: rgb(226, 226, 226);
 }
 .Information{
   position: relative;
   display: flex;
-
+  column-count: 2 ;
+  /* border: solid 1px rgb(49, 87, 211); */
 }
 .intorduce{
-  width: 20vw;
+  width: 60vw;
   text-align: center;
   padding-top: 3vh;
-  margin-left: 8vw;
-
+  /* border: solid 1px rgb(11, 238, 68); */
 }
 .photo{
   position: relative;
-  bottom: 8px;
-  padding-top: 3vh;
-  width: 200px;
-  border: solid 1px black;
+  margin-top: 5vh;
+  width: 20vw;
+  /* border: solid 1px rgb(109, 105, 69); */
 }
-.CV{
+.Trunk{
   position: relative;
-  width: 50vw;
-  top: 10vh ;
-  height: fit-content;
-  margin: 0 auto;
+  margin-top: 10px;
+}
+.KPG{
+  position: relative;
+  margin-top: 10px;
+}
+.CardK{
+  display: flex;
+}
+.CardT{
+  display: flex;
+}
+.KPGPP{
+  position: relative;
+  width: 10vw;
+  height: 30vh;
+  /* border: solid 2px rgb(247, 17, 86); */
+}
+.TrunkP{
+  position: relative;
+  height: 20vh;
+  width: 20vw;
+  /* border: solid 1px darkblue; */
 }

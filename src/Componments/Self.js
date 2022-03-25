@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Divider,
-        Box,
         Card,
         CardContent,
         Typography,
@@ -8,17 +7,12 @@ import { Divider,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import '../App.css';
-import myphoto from '../Photo.jpg';
+import myphoto from '../Photos/Photo.jpg';
 import ReactRoundedImage from "react-rounded-image";
+import Card1 from '../Componments/Card1';
+import Card2 from '../Componments/Card2';
 
-const bull = (
-<Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
->
-    •
-    </Box>
-);
+
 
 export default function BasicCard() {
 return (
@@ -42,13 +36,9 @@ return (
                 </Typography>
             </div>
             <div className='photo'>
-                {/* <ReactRoundedImage
-                image={myphoto}
-                imageWidth="150"
-                imageHeight="150"
-                roundedSize="0"
-                borderRadius="150"
-                /> */}
+                <img src={myphoto}
+                    width="100%"
+                    alt='selfphoto'/>
             </div>
         </div>
         <br/>
@@ -74,20 +64,8 @@ return (
             <Typography color="black"  gutterBottom>
                 <h2>工作經驗</h2>
             </Typography>
-            <Typography>
-                <h3>
-                    國立自然科學博物館 科學教育組-活動小組  實習生
-                </h3>
-                <p>
-                    參加這次的實習，目的是為了改善自己的口語表達能力，自己在多人面前時容易緊張，想利用在科博館可以與很多人講解的機會，來改善自己，也在這次實習中學到不少事物。
-                </p>
-                <h3>
-                    創科資訊 實習
-                </h3>
-                <p>
-                    利用大四下學期，畢業學分滿足的情況下，想做一點不一樣的嘗試，讓自己去學習更多系上沒有接觸過的知識，也想透過這次的實習去增加自己的實戰經驗，也能確認自己是否適合往這方面去發展。
-                </p>
-            </Typography>
+            <div className='KPG'><Card1/></div>
+            <div className='Trunk'><Card2/></div>
         </div>
         <br/>
         <Divider variant="middle"className='Divider'/>
@@ -105,13 +83,33 @@ return (
                 <h2>學歷</h2>
             </Typography>
             <Typography>
-                <h3>國立嘉義大學 數位學習設計與管理學系 畢業</h3>
+                <h4>國立嘉義大學 數位學習設計與管理學系</h4>
             </Typography>
         </div>
+        <br/>
+        <Divider variant="middle"className='Divider'/>
+        <div className='Skills'>
+            <br/>
+            <Typography color="black"  gutterBottom>
+                <h2>專業能力</h2>
+            </Typography>
+        </div>
+        <Divider variant="middle"className='Divider'/>
+        <div className='len'>
+            <br/>
+            <Typography color="black"  gutterBottom>
+                <h2>語言能力</h2>
+            </Typography>
+            <br/>
+            <Typography color="black"  gutterBottom>
+            中文-母語
+            <br/>
+            英文-多益585
+            </Typography>
+            <br/>
+            <Divider variant="middle"className='Divider'/>
+        </div>
     </CardContent>
-    {/* <CardActions>
-        <Button size="small">Learn More</Button>
-    </CardActions> */}
     </Card>
 );
 }
