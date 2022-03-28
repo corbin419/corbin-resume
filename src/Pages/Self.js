@@ -7,7 +7,7 @@ import { Divider,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import '../App.css';
-import myphoto from '../Photos/HDme.JPG';
+import myphoto from '../Photos/HDme.jpg';
 import Card1 from '../Componments/Card1';
 import Card2 from '../Componments/Card2';
 import Skill from '../Componments/Skills';
