@@ -9,8 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import '../App.css'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-const pages = ['自我介紹', '簡歷', '作品集'];
+
+const pages = ['簡歷', '工作經驗','作品集','學歷','能力'];
 
 const ResponsiveAppBar = () => {
 const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -22,19 +25,27 @@ const handleOpenNavMenu = (event) => {
 const handleCloseNavMenu = () => {
     setAnchorElNav(null);
 };
-
+const darkTheme = createTheme({
+    palette: {
+    mode: 'dark',
+    primary: {
+        main: '#001427'
+    },
+    },
+});
 
 
 
 return (
-    <AppBar position="static">
+    <ThemeProvider theme={darkTheme}>
+    <AppBar position="static" color='primary'>
     <Container maxWidth="xl">
         <Toolbar disableGutters>
         <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+            sx={{ mr: 2, display: { xs: 'none', md: 'flex' }}}
         >
             Corbin
         </Typography>
@@ -97,7 +108,7 @@ return (
 
         </Toolbar>
     </Container>
-    </AppBar>
+    </AppBar></ThemeProvider>
 );
 };
 export default ResponsiveAppBar;

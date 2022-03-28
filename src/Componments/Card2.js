@@ -22,7 +22,7 @@ return (
     <CardMedia
         component="img"
         className="TrunkP"
-        // image={Trunk}
+        image={Trunk}
         />
     </Card>
 );

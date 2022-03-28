@@ -1,5 +1,5 @@
 import './App.css';
-import Self from'./Componments/Self'
+import Self from'./Pages/Self'
 import Bar from './Componments/NavBar'
 
 
