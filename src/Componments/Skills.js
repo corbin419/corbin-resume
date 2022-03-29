@@ -1,49 +1,144 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+// import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import Trunk from '../Photos/Trunk1.jpg'
+import '../App.css';
 
-const Img = styled('img')({
-  margin: 'auto',
-  display: 'block',
-  maxWidth: '100%',
-  maxHeight: '100%',
-});
+
+
+// const Img = styled('img')({
+//   margin: 'auto',
+//   display: 'block',
+//   maxWidth: '100%',
+//   maxHeight: '100%',
+// });
 
 export default function ComplexGrid() {
   return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: 'auto',
-        maxWidth: 500,
-        flexGrow: 1,
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      }}
-    >
-      <Grid container spacing={2}>
-        <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src={Trunk} />
-          </ButtonBase>
-        </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-              創科資訊 實習
-              </Typography>
-              <Typography variant="body2" gutterBottom>
-              利用大四下學期，畢業學分滿足的情況下，想做一點不一樣的嘗試，讓自己去學習更多系上沒有接觸過的知識，也想透過這次的實習去增加自己的實戰經驗，也能確認自己是否適合往這方面去發展。
-              </Typography>
+    <Grid container rowspacing={2}columnSpacing={{ xs: 1, sm: 2, md: 3 }} className='Allskill'>
+      <Grid container spacing={1} className="G">
+          <Paper
+          sx={{
+            p: 2,
+            margin: 'auto',
+            maxWidth: 150,
+            flexGrow: 1 ,
+            elevation: 3 ,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm container>
+              <Grid item xs container>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h7" component="div">
+                  網頁前端
+                  </Typography><br/>
+                  <Typography variant='body2'>
+                    <li>HTML5</li>
+                    <li>Css</li>
+                    <li>React.js</li>
+                    <br/>
+                  </Typography>
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
+          
+          </Paper>
+
+          <Paper
+          sx={{
+            p: 2,
+            margin: 'auto',
+            maxWidth: 150,
+            flexGrow: 1 ,
+            elevation: 3 ,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm container>
+              <Grid item xs container>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h7" component="div">
+                  影像製作
+                  </Typography><br/>
+                  <Typography variant='body2'>
+                    <li>紀錄片、微電影拍攝</li>
+                    <li>Adobe Premiere 剪輯</li>
+                    <li>商品拍攝</li>
+                    <br/>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          </Paper>
       </Grid>
-    </Paper>
+      <Grid container spacing={1} className="G">
+          <Paper
+          sx={{
+            p: 2,
+            margin: 'auto',
+            maxWidth: 150,
+            flexGrow: 1 ,
+            elevation: 3 ,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm container>
+              <Grid item xs container>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h7" component="div">
+                  動畫製作
+                  </Typography><br/>
+                  <Typography variant='body2'>
+                    <li>Adobe After Effect</li>
+                    <li>Adobe Animation</li>
+                    <li>曾參加大林慈濟衛教短片製作</li>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          
+          </Paper>
+
+          <Paper
+          sx={{
+            p: 2,
+            margin: 'auto',
+            maxWidth: 150,
+            flexGrow: 1 ,
+            elevation: 3 ,
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+          }}
+        >
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm container>
+              <Grid item xs container>
+                <Grid item xs>
+                  <Typography gutterBottom variant="h7" component="div">
+                  語言能力
+                  </Typography><br/>
+                  <Typography variant='body2'>
+                    <li>中文：母語</li><br/>
+                    <li>英文：多益585</li>
+                    <br/>
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+          </Paper>
+      </Grid>
+    </Grid>
   );
 }

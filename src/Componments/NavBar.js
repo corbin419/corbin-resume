@@ -11,9 +11,13 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import '../App.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Link from '@mui/material/Link';
 
 
-const pages = ['簡歷', '工作經驗','作品集','學歷','能力'];
+
+const pages = ['簡歷', '工作經驗','能力','學歷','作品集'];
+
+
 
 const ResponsiveAppBar = () => {
 const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -94,8 +98,10 @@ return (
         >
             Corbin
         </Typography>
+
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+        <Link href="" underline="none">
             <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -103,12 +109,13 @@ return (
             >
                 {page}
             </Button>
+            </Link>
             ))}
         </Box>
-
         </Toolbar>
     </Container>
-    </AppBar></ThemeProvider>
+    </AppBar>
+    </ThemeProvider>
 );
 };
 export default ResponsiveAppBar;

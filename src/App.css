@@ -14,8 +14,8 @@
 }
 .Selfinfor{
   position: relative;
-  width: 45vw;
-  margin: 0 auto;
+  width: 60vw;
+  margin: 0 20vw;
   top: 2vh;
   height: fit-content;
 }
@@ -78,4 +78,16 @@
   height: 25vh;
   width: 20vw;
   /* border: solid 1px darkblue; */
+}
+.Allskill{
+  position: relative;
+  margin: 0 10vw;
+  display: block;
+  /* border: solid 1px navy; */
+}
+.G{
+  margin: 2vh;
+  display: flex;
+  padding-top: 5vh;
+  /* border: solid 1px rgb(218, 55, 123); */
 }

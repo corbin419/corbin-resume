@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
 import KPGP from '../Photos/KPGLOGO.jpg'
+import { Box } from '@mui/material';
 
 const Img = styled('img')({
   margin: 'auto',
@@ -27,9 +27,9 @@ return (
     >
     <Grid container spacing={2}>
         <Grid item>
-        <ButtonBase sx={{ width: 128, height: 128 }}>
+        <Box sx={{ width: 128, height: 128 }}>
             <Img alt="complex" src={KPGP} />
-        </ButtonBase>
+        </Box>
         </Grid>
         <Grid item xs={12} sm container>
         <Grid item xs container direction="column" spacing={2}>

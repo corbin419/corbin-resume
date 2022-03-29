@@ -7,10 +7,11 @@ import { Divider,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import '../App.css';
-import myphoto from '../Photos/HDme.jpg';
+import myphoto from '../Photos/HDme.JPG';
 import Card1 from '../Componments/Card1';
 import Card2 from '../Componments/Card2';
 import Skill from '../Componments/Skills';
+import Works from '../Componments/Works';
 
 
 
@@ -44,7 +45,7 @@ return (
         <br/>
         <Divider variant="middle"className='Divider'/>
         <br/>
-        <div className='Summary'>
+        <div className='Summary' id='Summ'>
             <Typography color="black"  gutterBottom>
                 <h2>簡歷</h2>
             </Typography>
@@ -59,7 +60,7 @@ return (
         </div>
         <br/>
         <Divider variant="middle"className='Divider'/>
-        <div className='Experience'>
+        <div className='Experience' id='exp'>
             <br/>
             <Typography color="black"  gutterBottom>
                 <h2>工作經驗</h2>
@@ -69,15 +70,17 @@ return (
         </div>
         <br/>
         <Divider variant="middle"className='Divider'/>
-        <div className='Works'>
-        <br/>
-        <Typography color="black"  gutterBottom>
-            <h2>作品集</h2>
-        </Typography>
+        <div className='Skills' id='skill'>
+            <br/>
+            <Typography color="black"  gutterBottom>
+                <h2>專業能力</h2>
+            </Typography>
+            <div><Skill/></div>
         </div>
+
         <br/>
         <Divider variant="middle"className='Divider'/>
-        <div className='Study'>
+        <div className='Study'id='study'>
             <br/>
             <Typography color="black"  gutterBottom>
                 <h2>學歷</h2>
@@ -88,27 +91,12 @@ return (
         </div>
         <br/>
         <Divider variant="middle"className='Divider'/>
-        <div className='Skills'>
-            <br/>
-            <Typography color="black"  gutterBottom>
-                <h2>專業能力</h2>
-            </Typography>
-            <div className='Design'><Skill/></div>
-        </div>
-        <Divider variant="middle"className='Divider'/>
-        <div className='len'>
-            <br/>
-            <Typography color="black"  gutterBottom>
-                <h2>語言能力</h2>
-            </Typography>
-            <br/>
-            <Typography color="black"  gutterBottom>
-            中文-母語
-            <br/>
-            英文-多益585
-            </Typography>
-            <br/>
-            <Divider variant="middle"className='Divider'/>
+        <div className='Works' id='work'>
+        <br/>
+        <Typography color="black"  gutterBottom>
+            <h2>作品集</h2>
+        </Typography>
+        <div className='Works'><Works/></div>
         </div>
     </CardContent>
     </Card>
