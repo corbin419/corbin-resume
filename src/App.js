@@ -1,14 +1,14 @@
 import './App.css';
 import Self from'./Pages/Self'
-import Bar from './Componments/NavBar'
+// import Bar from './Componments/NavBar'
 
 
 function App() {
   return (
     <div className="App">
-      <div className='BAR'>
+      {/* <div className='BAR'>
         <Bar/>
-      </div>
+      </div> */}
       <div className='Selfinfor'>
         <Self/>
       </div>
