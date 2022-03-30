@@ -27,10 +27,10 @@ const Img = styled('img')({
 
 export default function BasicCard() {
 return (
-    <Card sx={{ minWidth:300 }}>
+    <Card sx={{ minWidth:200 }}>
     <CardContent className='CardBox'>
         <div className='Information'>
-            <Grid container spacing={8}>
+            <Grid container spacing={7}>
                 <Grid item>
                     <Box sx={{ width: 128, height: 128 }}>
                         <Img src={ME}/>
@@ -66,7 +66,7 @@ return (
                 <br/><br/>
                 {'大二暑假為了改變自己不擅於表達自己想法的缺點，參加了科博館的實習生(科學教育組-活動小組)，為的就是讓自己能在團隊中與他人做更好的交流，且能在多人面前更自在的表達自己的想法。'}
                 <br/><br/>
-                {'大四下學期則是選擇到創科資訊去實習，為的就是讓自己能學到更多在學校沒有學習到的知識，也增加自己實作的經。'}
+                {'大四下學期則是選擇到創科資訊去實習，為的就是讓自己能學到更多在學校沒有學習到的知識，也增加自己實作的經驗。'}
                 <br/><br/>
             </Typography>
         </div>
