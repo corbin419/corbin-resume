@@ -7,12 +7,22 @@ import { Divider,
 } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import '../App.css';
-import myphoto from '../Photos/HDme.JPG';
 import Card1 from '../Componments/Card1';
 import Card2 from '../Componments/Card2';
 import Skill from '../Componments/Skills';
 import Works from '../Componments/Works';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import ButtonBase from '@mui/material/ButtonBase';
+import ME from '../Photos/HDme.JPG'
+import { Box } from '@mui/system';
 
+const Img = styled('img')({
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    });
 
 
 export default function BasicCard() {
@@ -20,27 +30,29 @@ return (
     <Card sx={{ minWidth:300 }}>
     <CardContent className='CardBox'>
         <div className='Information'>
-            <div className='intorduce'>
-                <Typography  color="black"gutterBottom>
-                    <h2>紀元翔</h2>
-                </Typography>
-                <Typography  color="black">
-                {'性別：男'}
-                <br/>
-                {'出生日期：2000/04/19'}
-                <br/>
-                {'電話：0965571499'}
-                <br/>
-                {'Mail：corbin50111@gmail.com'}
-                <br/><br/>
-                <Link href='https://github.com/corbin419' target="_blank"><GitHubIcon/></Link>
-                </Typography>
-            </div>
-            <div className='photo'>
-                <img src={myphoto}
-                    width="60%"
-                    alt='selfphoto'/>
-            </div>
+            <Grid container spacing={8}>
+                <Grid item>
+                    <Box sx={{ width: 128, height: 128 }}>
+                        <Img src={ME}/>
+                    </Box>
+                </Grid>
+                <Grid item xs={12} sm container>
+                <Grid item xs container direction="column" spacing={2}>
+                    <Grid item xs>
+                    <Typography gutterBottom variant="h6" component="div">
+                        紀元翔 Corbin
+                    </Typography><br/>
+                    <Typography variant="h7" gutterBottom>
+                        性別：男<br/>
+                        出生日期：2000/04/19<br/>
+                        電子郵件：corbin50111@gmail.com<br/>
+                        手機：0965571499<br/>
+                        <Link href='https://github.com/corbin419' target="_blank"><GitHubIcon/></Link>
+                    </Typography>
+                    </Grid>
+                </Grid>
+                </Grid>
+            </Grid>
         </div>
         <br/>
         <Divider variant="middle"className='Divider'/>

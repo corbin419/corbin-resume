@@ -8,7 +8,7 @@ import '../App.css';
 
 export default function ComplexGrid() {
   return (
-    <Grid container rowspacing={2}columnSpacing={{ xs: 1, sm: 2, md: 3 }} className='Allskill'>
+    <Grid container className='Allskill'>
       <Grid container spacing={1} className="G">
           <Paper
           sx={{
@@ -21,7 +21,7 @@ export default function ComplexGrid() {
               theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
           }}
         >
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm container>
               <Grid item xs container>
                 <Grid item xs>
@@ -32,7 +32,6 @@ export default function ComplexGrid() {
                     <li>HTML5</li>
                     <li>Css</li>
                     <li>React.js</li>
-                    <br/>
                   </Typography>
                 </Grid>
               </Grid>
@@ -45,7 +44,7 @@ export default function ComplexGrid() {
           sx={{
             p: 2,
             margin: 'auto',
-            maxWidth: 150,
+            maxWidth: 250,
             flexGrow: 1 ,
             elevation: 3 ,
             backgroundColor: (theme) =>
@@ -63,7 +62,6 @@ export default function ComplexGrid() {
                     <li>紀錄片、微電影拍攝</li>
                     <li>Adobe Premiere 剪輯</li>
                     <li>商品拍攝</li>
-                    <br/>
                   </Typography>
                 </Grid>
               </Grid>
@@ -76,7 +74,7 @@ export default function ComplexGrid() {
           sx={{
             p: 2,
             margin: 'auto',
-            maxWidth: 150,
+            maxWidth: 250,
             flexGrow: 1 ,
             elevation: 3 ,
             backgroundColor: (theme) =>
@@ -92,8 +90,9 @@ export default function ComplexGrid() {
                   </Typography><br/>
                   <Typography variant='body2'>
                     <li>Adobe After Effect</li>
+                    <br/>
                     <li>Adobe Animation</li>
-                    <li>曾參加大林慈濟衛教短片製作</li>
+                    
                   </Typography>
                 </Grid>
               </Grid>
@@ -106,7 +105,7 @@ export default function ComplexGrid() {
           sx={{
             p: 2,
             margin: 'auto',
-            maxWidth: 150,
+            maxWidth: 250,
             flexGrow: 1 ,
             elevation: 3 ,
             backgroundColor: (theme) =>
@@ -123,7 +122,7 @@ export default function ComplexGrid() {
                   <Typography variant='body2'>
                     <li>中文：母語</li><br/>
                     <li>英文：多益585</li>
-                    <br/>
+                    
                   </Typography>
                 </Grid>
               </Grid>

@@ -15,8 +15,7 @@
 .Selfinfor{
   position: relative;
   width: 60vw;
-  margin: 0 20vw;
-  height: fit-content;
+  margin: 0 auto;
 }
 .CardBox{
   position: relative;
@@ -80,7 +79,7 @@
 }
 .Allskill{
   position: relative;
-  margin: 0 10vw;
+  margin: 0 auto;
   display: block;
   /* border: solid 1px navy; */
 }
@@ -88,5 +87,12 @@
   margin: 2vh;
   display: flex;
   padding-top: 5vh;
+  margin: 0 auto;
   /* border: solid 1px rgb(218, 55, 123); */
+}
+.Works{
+  position: relative;
+  margin: 0 auto;
+  display: block;
+  /* border: solid 1px navy; */
 }
