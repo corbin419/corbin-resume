@@ -15,7 +15,7 @@
 .Selfinfor{
   position: relative;
   width: 60vw;
-  margin: 0 auto;
+  margin: 0 20vw;
 }
 .CardBox{
   position: relative;
@@ -25,6 +25,7 @@
 .Information{
   position: relative;
   display: flex;
+  margin-left: 10vw;
   /* border: solid 1px rgb(49, 87, 211); */
 }
 .intorduce{
