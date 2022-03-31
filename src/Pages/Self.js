@@ -13,7 +13,6 @@ import Skill from '../Componments/Skills';
 import Works from '../Componments/Works';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
 import ME from '../Photos/HDme.JPG'
 import { Box } from '@mui/system';
 
@@ -59,7 +58,7 @@ return (
         <br/>
         <div className='Summary' id='Summ'>
             <Typography color="black"  gutterBottom>
-                <h2>簡歷</h2>
+                <Box>簡歷</Box>
             </Typography>
             <Typography variant="h7" colr="black">
                 {'目前就讀於國立嘉義大學數位學習設計與管理學系大四，透過系上的課程有接觸過Android Studio、Visual Studio、Visual Studio Code(HTML5、CSS3)以及基礎的C++， 在畢業專題方面，負責組內的網頁撰寫部分。也接觸過Adobe的軟體，像是AI、PS、AE、PR，熟悉這些軟體的基本操作，也能自行製作簡易作品。'}
@@ -74,8 +73,8 @@ return (
         <Divider variant="middle"className='Divider'/>
         <div className='Experience' id='exp'>
             <br/>
-            <Typography color="black"  gutterBottom>
-                <h2>工作經驗</h2>
+            <Typography variant="h5" color="black"  gutterBottom fontWeight="bold" >
+                <Box>工作經驗</Box>
             </Typography>
             <div className='KPG'><Card1/></div>
             <div className='Trunk'><Card2/></div>
@@ -85,7 +84,7 @@ return (
         <div className='Skills' id='skill'>
             <br/>
             <Typography color="black"  gutterBottom>
-                <h2>專業能力</h2>
+                <Box>專業能力</Box>
             </Typography>
             <div><Skill/></div>
         </div>
@@ -95,10 +94,10 @@ return (
         <div className='Study'id='study'>
             <br/>
             <Typography color="black"  gutterBottom>
-                <h2>學歷</h2>
+                <Box>學歷</Box>
             </Typography>
             <Typography>
-                <h4>國立嘉義大學 數位學習設計與管理學系</h4>
+                <Box>國立嘉義大學 數位學習設計與管理學系</Box>
             </Typography>
         </div>
         <br/>
@@ -106,7 +105,7 @@ return (
         <div className='Works' id='work'>
         <br/>
         <Typography color="black"  gutterBottom>
-            <h2>作品集</h2>
+            <Box>作品集</Box>
         </Typography>
         <div className='Works'><Works/></div>
         </div>
