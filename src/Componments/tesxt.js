@@ -74,11 +74,7 @@ export default function BasicTabs(props) {
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
+        <Tabs value={value} onChange={handleChange}>
           <Tab label="登入" {...a11yProps(0)} />
           <Tab label="訪客登入" {...a11yProps(1)} />
         </Tabs>
@@ -113,7 +109,7 @@ export default function BasicTabs(props) {
                 color="gray"
                 sx={{ marginTop: "8px", width: "180px" }}
               >
-                沒有帳號嗎？創一個吧！
+                沒有帳號嗎？辦一個吧！
               </Typography>
             </ThemeProvider>
           </Link>
@@ -159,7 +155,10 @@ export default function BasicTabs(props) {
             <Typography variant="h7" sx={{ fontWeight: 700 }}>
               你484懶得辦帳號？那就用訪客來登入留言唄~
             </Typography>
-            <Img src={HaHa} sx={{ marginTop: "8px" }} />
+            <Img
+              src={HaHa}
+              sx={{ marginTop: "8px", width: "200px", height: "100px" }}
+            />
             <Link href="/Register">
               <ThemeProvider theme={theme}>
                 <Typography

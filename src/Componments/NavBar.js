@@ -11,6 +11,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import Test from "../Componments/tesxt";
+import LoginIcon from "@mui/icons-material/Login";
 
 const theme = createTheme({
   palette: {
@@ -26,10 +27,10 @@ const theme = createTheme({
   },
 });
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar(props) {
   const [open, setOpen] = React.useState(false);
+  // const [barText, setBarText] = React.useState();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,6 +38,7 @@ export default function ButtonAppBar() {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <ThemeProvider theme={theme}>
@@ -63,9 +65,21 @@ export default function ButtonAppBar() {
                 variant="outlined"
                 startIcon={<AccountCircleIcon />}
                 color="white"
-                onClick={handleClickOpen}
+                href="/Register"
+                sx={{ marginRight: "16px" }}
               >
-                <Typography color="White">登入/註冊</Typography>
+                <Typography color="White">註冊</Typography>
+              </Button>
+            </ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="outlined"
+                startIcon={<LoginIcon />}
+                color="white"
+                onClick={handleClickOpen}
+                sx={{ marginRight: "8px" }}
+              >
+                <Typography color="White">登入</Typography>
               </Button>
             </ThemeProvider>
           </Toolbar>

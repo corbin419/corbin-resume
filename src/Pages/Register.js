@@ -21,13 +21,18 @@ export default function Register() {
     <Paper
       sx={{
         p: 2,
-        margin: "auto",
+        margin: "5vh auto",
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: (theme) =>
           theme.palette.mode === "dark" ? "#1A2027" : "#fff",
       }}
     >
+      <Box>
+        <Typography variant="h6" sx={{ fontWeight: 600 }}>
+          註冊帳號
+        </Typography>
+      </Box>
       <Box sx={{ display: "flex" }}>
         <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
           帳號名稱 ：
@@ -83,6 +88,7 @@ export default function Register() {
               maxWidth: "200px",
               margin: "auto",
             }}
+            href="/"
           >
             <Typography variant="body2">取消</Typography>
           </Button>
