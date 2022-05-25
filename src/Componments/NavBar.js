@@ -3,15 +3,14 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import LoginIcon from "@mui/icons-material/Login";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { DialogContent, IconButton, Link, TextField } from "@mui/material";
+import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import Test from "../Componments/tesxt";
 
 const theme = createTheme({
   palette: {
@@ -62,11 +61,11 @@ export default function ButtonAppBar() {
             <ThemeProvider theme={theme}>
               <Button
                 variant="outlined"
-                startIcon={<LoginIcon />}
+                startIcon={<AccountCircleIcon />}
                 color="white"
                 onClick={handleClickOpen}
               >
-                <Typography color="White">Login</Typography>
+                <Typography color="White">登入/註冊</Typography>
               </Button>
             </ThemeProvider>
           </Toolbar>
@@ -89,76 +88,10 @@ export default function ButtonAppBar() {
             }}
             onClick={handleClose}
           >
-            <CloseIcon />
+            <CloseIcon fontSize="small" />
           </IconButton>
         </div>
-        <DialogTitle>
-          <Typography variant="h5">登入</Typography>
-        </DialogTitle>
-        <DialogContent>
-          <Box sx={{ display: "flex" }}>
-            <Typography sx={{ p: 2, width: "125px" }}>
-              帳號Account ：
-            </Typography>
-            <TextField
-              variant="outlined"
-              size="small"
-              sx={{ mt: 1 }}
-              placeholder="請輸入帳號"
-            />
-          </Box>
-          <Box sx={{ display: "flex" }}>
-            <Typography sx={{ p: 2, width: "125px" }}>
-              密碼Password ：
-            </Typography>
-            <TextField
-              variant="outlined"
-              size="small"
-              sx={{ mt: 1 }}
-              placeholder="請輸入密碼"
-            />
-          </Box>
-          <Box sx={{ marginLeft: "16px" }}>
-            <Link href="/Register">
-              <ThemeProvider theme={theme}>
-                <Typography color="gray">沒有帳號嗎？</Typography>
-              </ThemeProvider>
-            </Link>
-          </Box>
-        </DialogContent>
-        <DialogActions sx={{ m: 1 }}>
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              color="Button"
-              sx={{
-                minHeight: "34px",
-                minWidth: "180px",
-                maxHeight: "34px",
-                maxWidth: "180px",
-                margin: "auto",
-              }}
-            >
-              <Typography variant="body2" color="White">
-                登入
-              </Typography>
-            </Button>
-            <Button
-              variant="outlined"
-              color="Button"
-              sx={{
-                minHeight: "34px",
-                minWidth: "180px",
-                maxHeight: "34px",
-                maxWidth: "180px",
-                margin: "auto",
-              }}
-              onClick={handleClose}
-            >
-              <Typography variant="body2">取消</Typography>
-            </Button>
-          </ThemeProvider>
-        </DialogActions>
+        <Test close={handleClose} />
       </Dialog>
     </Box>
   );
