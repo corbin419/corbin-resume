@@ -16,6 +16,8 @@
   position: relative;
   width: 60vw;
   margin: 0 auto;
+  margin-top: 2vh;
+  padding-bottom: 2vh;
 }
 .CardBox{
   position: relative;

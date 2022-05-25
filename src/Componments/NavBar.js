@@ -1,121 +1,165 @@
-// import * as React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-// import Menu from '@mui/material/Menu';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import Container from '@mui/material/Container';
-// import Button from '@mui/material/Button';
-// import MenuItem from '@mui/material/MenuItem';
-// import '../App.css'
-// import { ThemeProvider, createTheme } from '@mui/material/styles';
-// import Link from '@mui/material/Link';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import LoginIcon from "@mui/icons-material/Login";
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { DialogContent, IconButton, Link, TextField } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
+const theme = createTheme({
+  palette: {
+    white: {
+      main: "rgb(255,255,255)",
+    },
+    Button: {
+      main: "#363F4E",
+    },
+    Log: {
+      main: "#5CB4FD",
+    },
+  },
+});
 
+export default function ButtonAppBar() {
+  const [open, setOpen] = React.useState(false);
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-// const pages = ['簡歷', '工作經驗','能力','學歷','作品集'];
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-
-
-// const ResponsiveAppBar = () => {
-// const [anchorElNav, setAnchorElNav] = React.useState(null);
-
-// const handleOpenNavMenu = (event) => {
-//     setAnchorElNav(event.currentTarget);
-// };
-
-// const handleCloseNavMenu = () => {
-//     setAnchorElNav(null);
-// };
-// const darkTheme = createTheme({
-//     palette: {
-//     mode: 'dark',
-//     primary: {
-//         main: '#001427'
-//     },
-//     },
-// });
-
-
-
-// return (
-//     <ThemeProvider theme={darkTheme}>
-//     <AppBar position="static" color='primary'>
-//     <Container maxWidth="xl">
-//         <Toolbar disableGutters>
-//         <Typography
-//             variant="h6"
-//             noWrap
-//             component="div"
-//             sx={{ mr: 2, display: { xs: 'none', md: 'flex' }}}
-//         >
-//             Corbin
-//         </Typography>
-        
-//         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-//             <IconButton
-//             size="large"
-//             aria-label="account of current user"
-//             aria-controls="menu-appbar"
-//             aria-haspopup="true"
-//             onClick={handleOpenNavMenu}
-//             color="inherit"
-//             >
-//             <MenuIcon />
-//             </IconButton>
-//             <Menu
-//             id="menu-appbar"
-//             anchorEl={anchorElNav}
-//             anchorOrigin={{
-//                 vertical: 'bottom',
-//                 horizontal: 'left',
-//             }}
-//             keepMounted
-//             transformOrigin={{
-//                 vertical: 'top',
-//                 horizontal: 'left',
-//             }}
-//             open={Boolean(anchorElNav)}
-//             onClose={handleCloseNavMenu}
-//             sx={{
-//                 display: { xs: 'block', md: 'none' },
-//             }}
-//             >
-//             {pages.map((page) => (
-//                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-//                 <Typography textAlign="center">{page}</Typography>
-//                 </MenuItem>
-//             ))}
-//             </Menu>
-//         </Box>
-//         <Typography
-//             variant="h6"
-//                 noWrap
-//             component="div"
-//             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-//         >
-//             Corbin
-//         </Typography>
-
-//         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-//             {pages.map((page) => (
-//         <Link href="" underline="none">
-//             <Button
-//                 key={page}
-//                 onClick={handleCloseNavMenu}
-//                 sx={{ my: 2, color: 'white', display: 'block' }}
-//             >
-//                 {page}
-//             </Button>
-//             </Link>
-//             ))}
-//         </Box>
-//         </Toolbar>
-//     </Container>
-//     </AppBar>
-//     </ThemeProvider>
-// );
-// };
-// export default ResponsiveAppBar;
+  const handleClose = () => {
+    setOpen(false);
+  };
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <ThemeProvider theme={theme}>
+        <AppBar position="static" color="Button">
+          <Toolbar>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, fontWeight: 600 }}
+              color="White"
+            >
+              Corbin
+            </Typography>
+            <Button
+              variant="outlined"
+              color="white"
+              sx={{ marginRight: "16px" }}
+              href="/Board"
+            >
+              <Typography variant="h7">留言板</Typography>
+            </Button>
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="outlined"
+                startIcon={<LoginIcon />}
+                color="white"
+                onClick={handleClickOpen}
+              >
+                <Typography color="White">Login</Typography>
+              </Button>
+            </ThemeProvider>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
+      <Dialog
+        fullScreen={fullScreen}
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <div>
+          <IconButton
+            className="closebtn"
+            sx={{
+              maxWidth: "15px",
+              maxHeight: "15px",
+              marginLeft: "92%",
+              marginTop: "2vh",
+            }}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <DialogTitle>
+          <Typography variant="h5">登入</Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Box sx={{ display: "flex" }}>
+            <Typography sx={{ p: 2, width: "125px" }}>
+              帳號Account ：
+            </Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              sx={{ mt: 1 }}
+              placeholder="請輸入帳號"
+            />
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            <Typography sx={{ p: 2, width: "125px" }}>
+              密碼Password ：
+            </Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              sx={{ mt: 1 }}
+              placeholder="請輸入密碼"
+            />
+          </Box>
+          <Box sx={{ marginLeft: "16px" }}>
+            <Link href="/Register">
+              <ThemeProvider theme={theme}>
+                <Typography color="gray">沒有帳號嗎？</Typography>
+              </ThemeProvider>
+            </Link>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ m: 1 }}>
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              color="Button"
+              sx={{
+                minHeight: "34px",
+                minWidth: "180px",
+                maxHeight: "34px",
+                maxWidth: "180px",
+                margin: "auto",
+              }}
+            >
+              <Typography variant="body2" color="White">
+                登入
+              </Typography>
+            </Button>
+            <Button
+              variant="outlined"
+              color="Button"
+              sx={{
+                minHeight: "34px",
+                minWidth: "180px",
+                maxHeight: "34px",
+                maxWidth: "180px",
+                margin: "auto",
+              }}
+              onClick={handleClose}
+            >
+              <Typography variant="body2">取消</Typography>
+            </Button>
+          </ThemeProvider>
+        </DialogActions>
+      </Dialog>
+    </Box>
+  );
+}

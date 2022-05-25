@@ -1,18 +1,22 @@
-import './App.css';
-import Self from'./Pages/Self'
-// import Bar from './Componments/NavBar'
-
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from './Pages/HomePage'
+import Board from './Pages/Board'
+import Register from './Pages/Register'
 
 function App() {
   return (
-    <div className="App">
-      {/* <div className='BAR'>
-        <Bar/>
-      </div> */}
-      <div className='Selfinfor'>
-        <Self/>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Board" element={<Board/>}/>
+        <Route path="/register" element={<Register/>}/>
+      </Routes>
+    </Router>
   );
 }
 
