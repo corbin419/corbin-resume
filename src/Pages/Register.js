@@ -1,6 +1,15 @@
 import React from "react";
-import { Box, Paper, TextField, Typography, Button } from "@mui/material";
+import {
+  Box,
+  Paper,
+  TextField,
+  Typography,
+  Button,
+  IconButton,
+  Link,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 const theme = createTheme({
   palette: {
@@ -18,82 +27,91 @@ const theme = createTheme({
 
 export default function Register() {
   return (
-    <Paper
-      sx={{
-        p: 2,
-        margin: "5vh auto",
-        maxWidth: 500,
-        flexGrow: 1,
-        backgroundColor: (theme) =>
-          theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-      }}
-    >
-      <Box>
-        <Typography variant="h6" sx={{ fontWeight: 600 }}>
-          註冊帳號
-        </Typography>
+    <div>
+      <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
+        <Link href="/">
+          <IconButton>
+            <ArrowBackIosNewIcon fontSize="large" />
+          </IconButton>
+        </Link>
       </Box>
-      <Box sx={{ display: "flex" }}>
-        <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
-          帳號名稱 ：
-        </Typography>
-        <TextField
-          variant="outlined"
-          size="small"
-          sx={{ mt: 1 }}
-          placeholder="請輸入帳號名稱"
-          fullWidth
-        />
-      </Box>
-      <Box sx={{ display: "flex" }}>
-        <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
-          密碼 ：
-        </Typography>
-        <TextField
-          variant="outlined"
-          size="small"
-          sx={{ mt: 1 }}
-          placeholder="請輸入密碼"
-          fullWidth
-        />
-      </Box>
-      <Box
-        display="flex"
-        sx={{ width: "420px", marginTop: "16px", marginLeft: "auto" }}
+      <Paper
+        sx={{
+          p: 2,
+          margin: "5vh auto",
+          maxWidth: 500,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        }}
       >
-        <ThemeProvider theme={theme}>
-          <Button
-            variant="contained"
-            color="Button"
-            sx={{
-              minHeight: "34px",
-              minWidth: "200px",
-              maxHeight: "34px",
-              maxWidth: "200px",
-              margin: "auto",
-              marginLeft: 0,
-            }}
-          >
-            <Typography variant="body2" color="White">
-              註冊
-            </Typography>
-          </Button>
-          <Button
+        <Box>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
+            註冊帳號
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
+            帳號名稱 ：
+          </Typography>
+          <TextField
             variant="outlined"
-            color="Button"
-            sx={{
-              minHeight: "34px",
-              minWidth: "200px",
-              maxHeight: "34px",
-              maxWidth: "200px",
-              margin: "auto",
-            }}
-            href="/"
-          >
-            <Typography variant="body2">取消</Typography>
-          </Button>
-        </ThemeProvider>
-      </Box>
-    </Paper>
+            size="small"
+            sx={{ mt: 1 }}
+            placeholder="請輸入帳號名稱"
+            fullWidth
+          />
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
+            密碼 ：
+          </Typography>
+          <TextField
+            variant="outlined"
+            size="small"
+            sx={{ mt: 1 }}
+            placeholder="請輸入密碼"
+            fullWidth
+          />
+        </Box>
+        <Box
+          display="flex"
+          sx={{ width: "420px", marginTop: "16px", marginLeft: "auto" }}
+        >
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              color="Button"
+              sx={{
+                minHeight: "34px",
+                minWidth: "200px",
+                maxHeight: "34px",
+                maxWidth: "200px",
+                margin: "auto",
+                marginLeft: 0,
+              }}
+            >
+              <Typography variant="body2" color="White">
+                註冊
+              </Typography>
+            </Button>
+            <Button
+              variant="outlined"
+              color="Button"
+              sx={{
+                minHeight: "34px",
+                minWidth: "200px",
+                maxHeight: "34px",
+                maxWidth: "200px",
+                margin: "auto",
+              }}
+              href="/"
+            >
+              <Typography variant="body2">取消</Typography>
+            </Button>
+          </ThemeProvider>
+        </Box>
+      </Paper>
+    </div>
   );
 }

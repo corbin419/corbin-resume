@@ -1,13 +1,13 @@
 import * as React from "react";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import "../App.css";
+import { Box } from "@mui/material";
 
-export default function ComplexGrid() {
+export default function ComplexBox() {
   return (
-    <Grid container className="Allskill">
-      <Grid container spacing={1} className="G">
+    <Box sx={{ margin: "2vh auto", p: "3vh 0" }}>
+      <Box sx={{ width: "40vw", margin: "2vh auto" }} display="flex">
         <Paper
           sx={{
             p: 2,
@@ -19,23 +19,17 @@ export default function ComplexGrid() {
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
           }}
         >
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm container>
-              <Grid item xs container>
-                <Grid item xs>
-                  <Typography gutterBottom variant="h7" component="div">
-                    網頁前端
-                  </Typography>
-                  <br />
-                  <Typography variant="body2">
-                    <li>HTML5</li>
-                    <li>CSS</li>
-                    <li>React.js</li>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+          <Box container spacing={1}>
+            <Typography gutterBottom variant="h7" component="div">
+              網頁前端
+            </Typography>
+            <br />
+            <Typography variant="body2">
+              <li>HTML5</li>
+              <li>CSS</li>
+              <li>React.js</li>
+            </Typography>
+          </Box>
         </Paper>
 
         <Paper
@@ -49,26 +43,22 @@ export default function ComplexGrid() {
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
           }}
         >
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm container>
-              <Grid item xs container>
-                <Grid item xs>
-                  <Typography gutterBottom variant="h7" component="div">
-                    影像製作
-                  </Typography>
-                  <br />
-                  <Typography variant="body2">
-                    <li>紀錄片、微電影拍攝</li>
-                    <li>Adobe Premiere 剪輯</li>
-                    <li>商品拍攝</li>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+          <Box container spacing={1}>
+            <Box item xs>
+              <Typography gutterBottom variant="h7" component="div">
+                影像製作
+              </Typography>
+              <br />
+              <Typography variant="body2">
+                <li>紀錄片、微電影拍攝</li>
+                <li>Adobe Premiere 剪輯</li>
+                <li>商品拍攝</li>
+              </Typography>
+            </Box>
+          </Box>
         </Paper>
-      </Grid>
-      <Grid container spacing={1} className="G">
+      </Box>
+      <Box sx={{ width: "40vw", margin: "2vh auto" }} display="flex">
         <Paper
           sx={{
             p: 2,
@@ -80,10 +70,10 @@ export default function ComplexGrid() {
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
           }}
         >
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm container>
-              <Grid item xs container>
-                <Grid item xs>
+          <Box container spacing={2}>
+            <Box item xs={12} sm container>
+              <Box item xs container>
+                <Box item xs>
                   <Typography gutterBottom variant="h7" component="div">
                     動畫製作
                   </Typography>
@@ -93,10 +83,10 @@ export default function ComplexGrid() {
                     <br />
                     <li>Adobe Animation</li>
                   </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
         </Paper>
 
         <Paper
@@ -110,10 +100,10 @@ export default function ComplexGrid() {
               theme.palette.mode === "dark" ? "#1A2027" : "#fff",
           }}
         >
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm container>
-              <Grid item xs container>
-                <Grid item xs>
+          <Box container spacing={1}>
+            <Box item xs={12} sm container>
+              <Box item xs container>
+                <Box item xs>
                   <Typography gutterBottom variant="h7" component="div">
                     語言能力
                   </Typography>
@@ -123,12 +113,12 @@ export default function ComplexGrid() {
                     <br />
                     <li>英文：多益585</li>
                   </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+                </Box>
+              </Box>
+            </Box>
+          </Box>
         </Paper>
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }

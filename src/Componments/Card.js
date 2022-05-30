@@ -5,12 +5,12 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
 
 export default function ComplexGrid(props) {
-  const { internTittle, Content ,Image} = props;
+  const { internTittle, Content, Image } = props;
   return (
     <Paper
       sx={{
         p: 2,
-        margin: "auto",
+        margin: "2vh auto",
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: (theme) =>
@@ -19,9 +19,7 @@ export default function ComplexGrid(props) {
     >
       <Grid container spacing={2}>
         <Grid item>
-          <Box sx={{ width: 128, height: 128 }}>
-            {Image}
-          </Box>
+          <Box sx={{ width: 128, height: 128 }}>{Image}</Box>
         </Grid>
         <Grid item xs={12} sm container>
           <Grid item xs container direction="column" spacing={2}>

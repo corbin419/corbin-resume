@@ -11,88 +11,16 @@
 .App {
   width: 100%;
   height: 100%;
-  background-color: #8d9591;
+  background-color: aliceblue;
 }
 .Selfinfor {
   position: relative;
-  width: 60vw;
-  margin: 0 auto;
-  padding-top: 2vh;
-  padding-bottom: 2vh;
-}
-.CardBox {
-  position: relative;
-  margin: 0 auto;
-  background-color: rgb(233, 233, 233);
-}
-.Information {
-  position: relative;
-  display: flex;
-  /* margin-left: 10vw; */
-  /* border: solid 1px rgb(49, 87, 211); */
-}
-.intorduce {
-  position: relative;
-  width: 50vw;
-  text-align: center;
-  padding-top: 3vh;
-  /* border: solid 1px rgb(11, 238, 68); */
 }
 .photo {
   position: relative;
   margin: auto;
   width: 30vw;
   /* border: solid 1px rgb(109, 105, 69); */
-}
-.Trunk {
-  position: relative;
-  margin-top: 10px;
-}
-.KPG {
-  position: relative;
-  margin-top: 10px;
-}
-.CardK {
-  display: flex;
-}
-.CardT {
-  display: flex;
-}
-.CardS {
-  display: flex;
-}
-.Divider {
-  position: relative;
-  border: solid 1px blueviolet;
-}
-.KPGPP {
-  position: relative;
-  margin: 1vw auto;
-  margin-right: 1vw;
-  width: 20vw;
-  height: 15w;
-  /* border: solid 2px rgb(247, 17, 86); */
-}
-.TrunkP {
-  position: relative;
-  margin: auto;
-  margin-right: 1vw;
-  height: 25vh;
-  width: 20vw;
-  /* border: solid 1px darkblue; */
-}
-.Allskill {
-  position: relative;
-  margin: 0 auto;
-  display: block;
-  /* border: solid 1px navy; */
-}
-.G {
-  margin: 2vh;
-  display: flex;
-  padding-top: 5vh;
-  margin: 0 auto;
-  /* border: solid 1px rgb(218, 55, 123); */
 }
 .Works {
   position: relative;

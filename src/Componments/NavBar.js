@@ -40,7 +40,7 @@ export default function ButtonAppBar(props) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 1 }}>
       <ThemeProvider theme={theme}>
         <AppBar position="static" color="Button">
           <Toolbar>
