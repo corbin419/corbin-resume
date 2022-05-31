@@ -8,7 +8,9 @@ import {
   Divider,
   IconButton,
   Link,
+  Snackbar,
 } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
@@ -25,8 +27,33 @@ const theme = createTheme({
     },
   },
 });
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function Board() {
+  const [AlertText, setAlertText] = React.useState("");
+  const [Severity, setSeverity] = React.useState("");
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = state;
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
+  const handleMessage = () => {
+    setState({
+      open: true,
+      ...{
+        vertical: "top",
+        horizontal: "center", //position of popout
+      },
+    });
+    setAlertText("留言成功");
+    setSeverity("success");
+  };
   return (
     <div>
       <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
@@ -86,7 +113,7 @@ export default function Board() {
           <Typography sx={{ width: "58px", p: 1 }}>留言：</Typography>
           <TextField
             size="small"
-            sx={{ width: "400px" }}
+            sx={{ width: "30vw" }}
             placeholder="你想說點啥？"
           />
           <ThemeProvider theme={theme}>
@@ -99,6 +126,7 @@ export default function Board() {
                 minHeight: "36px",
                 maxHeight: "36px",
               }}
+              onClick={handleMessage}
             >
               <Typography variant="h7" color="White" sx={{ fontWeight: 700 }}>
                 送出
@@ -107,6 +135,17 @@ export default function Board() {
           </ThemeProvider>
         </Box>
       </Paper>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={1500}
+        onClose={handleClose}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity={Severity} sx={{ width: "100%" }}>
+          {AlertText}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

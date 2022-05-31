@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 
 export default function ComplexBox() {
   return (
-    <Box sx={{ margin: "2vh auto", p: "3vh 0" }}>
+    <Box sx={{ margin: "0 auto", p: "3vh 0" }}>
       <Box sx={{ width: "40vw", margin: "2vh auto" }} display="flex">
         <Paper
           sx={{
@@ -88,7 +88,6 @@ export default function ComplexBox() {
             </Box>
           </Box>
         </Paper>
-
         <Paper
           sx={{
             p: 2,

@@ -4,11 +4,13 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { Link, TextField } from "@mui/material";
+import { Link, TextField, Snackbar } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import HaHa from "../Photos/laugh.jpg";
 import { styled } from "@mui/material/styles";
+import axios from "../Axios.config";
+import MuiAlert from "@mui/material/Alert";
 
 const theme = createTheme({
   palette: {
@@ -56,8 +58,21 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function BasicTabs(props) {
+  const [AlertText, setAlertText] = React.useState("");
+  const [Severity, setSeverity] = React.useState("");
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal, open } = state;
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
   const [value, setValue] = React.useState(0);
   const { close } = props;
   const Img = styled("img")({
@@ -66,9 +81,53 @@ export default function BasicTabs(props) {
     maxWidth: "100%",
     maxHeight: "100%",
   });
+  const [username, setUsername] = React.useState();
+  const [password, setPassword] = React.useState();
+
+  const HandleLogin = async (event) => {
+    let check = false;
+    console.log("hi");
+    event.preventDefault();
+    await axios
+      .post("api/login", {
+        username: username,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
+        check = true;
+      })
+      .catch((error) => {});
+    setState({
+      open: true,
+      ...{
+        vertical: "top",
+        horizontal: "center", //position of popout
+      },
+    });
+    if (check === true) {
+      setAlertText("登入成功，快去留言唄");
+      setSeverity("success");
+
+    } else {
+      setAlertText("登入失敗QAQ");
+      setSeverity("error");
+    }
+  };
+  const onChangeUsername = (e) => {
+    const username = e.target.value;
+    setUsername(username);
+  };
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+  const guestLogin = () => {
+    console.log("wee");
   };
 
   return (
@@ -89,6 +148,7 @@ export default function BasicTabs(props) {
             size="small"
             sx={{ mt: 1 }}
             placeholder="請輸入帳號"
+            onChange={onChangeUsername}
           />
         </Box>
         <Box sx={{ display: "flex" }}>
@@ -100,6 +160,8 @@ export default function BasicTabs(props) {
             size="small"
             sx={{ mt: 1 }}
             placeholder="請輸入密碼"
+            onChange={onChangePassword}
+            type="password"
           />
         </Box>
         <Box sx={{ marginLeft: "16px", width: "180px" }}>
@@ -126,6 +188,7 @@ export default function BasicTabs(props) {
                   margin: "auto",
                   marginLeft: 0,
                 }}
+                onClick={HandleLogin}
               >
                 <Typography variant="body2" color="White">
                   登入
@@ -183,6 +246,7 @@ export default function BasicTabs(props) {
                   margin: "auto",
                   marginLeft: 0,
                 }}
+                onClick={guestLogin}
               >
                 <Typography variant="body2" color="White">
                   訪客登入
@@ -206,6 +270,17 @@ export default function BasicTabs(props) {
           </Box>
         </Box>
       </TabPanel>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={1500}
+        onClose={handleClose}
+        key={vertical + horizontal}
+      >
+        <Alert onClose={handleClose} severity={Severity} sx={{ width: "100%" }}>
+          {AlertText}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

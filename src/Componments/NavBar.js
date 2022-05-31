@@ -10,7 +10,7 @@ import Dialog from "@mui/material/Dialog";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import Test from "../Componments/tesxt";
+import LoginContent from "./LoginContent";
 import LoginIcon from "@mui/icons-material/Login";
 
 const theme = createTheme({
@@ -105,7 +105,7 @@ export default function ButtonAppBar(props) {
             <CloseIcon fontSize="small" />
           </IconButton>
         </div>
-        <Test close={handleClose} />
+        <LoginContent close={handleClose} />
       </Dialog>
     </Box>
   );
