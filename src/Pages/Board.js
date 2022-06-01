@@ -9,6 +9,7 @@ import {
   IconButton,
   Link,
   Snackbar,
+  Avatar,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -30,8 +31,11 @@ const theme = createTheme({
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+const message = "123";
 
 export default function Board() {
+  const [name, setName] = React.useState("訪客");
+  const [username, setUsername] = React.useState();
   const [AlertText, setAlertText] = React.useState("");
   const [Severity, setSeverity] = React.useState("");
   const [state, setState] = React.useState({
@@ -86,6 +90,16 @@ export default function Board() {
             這裡是留言板
           </Typography>
           <Divider />
+          <Box sx={{ m: "8px" }}>
+            <Box container wrap="nowrap" spacing={2} display="flex">
+              <Box>
+                <Avatar />
+              </Box>
+              <Box sx={{ m: "auto 16px" }}>
+                <Typography variant="h7">{message}</Typography>
+              </Box>
+            </Box>
+          </Box>
         </Box>
       </Paper>
       <Paper

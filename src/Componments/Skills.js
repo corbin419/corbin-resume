@@ -31,7 +31,6 @@ export default function ComplexBox() {
             </Typography>
           </Box>
         </Paper>
-
         <Paper
           sx={{
             p: 2,

@@ -79,7 +79,7 @@ export default function Register() {
       },
     });
     if (check === true) {
-      setAlertText("註冊成功，快去登入唄");
+      setAlertText(username + "註冊成功，快去登入唄");
       setSeverity("success");
     } else {
       setAlertText("註冊失敗QAQ");
