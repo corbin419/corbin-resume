@@ -14,6 +14,9 @@ import {
 import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { useEffect } from "react";
+import axios from "../Axios.config";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
 
 const theme = createTheme({
   palette: {
@@ -31,11 +34,7 @@ const theme = createTheme({
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-const message = "123";
-
 export default function Board() {
-  const [name, setName] = React.useState("訪客");
-  const [username, setUsername] = React.useState();
   const [AlertText, setAlertText] = React.useState("");
   const [Severity, setSeverity] = React.useState("");
   const [state, setState] = React.useState({
@@ -44,9 +43,12 @@ export default function Board() {
     horizontal: "center",
   });
   const { vertical, horizontal, open } = state;
+
   const handleClose = () => {
     setState({ ...state, open: false });
   };
+  const [message, setMessage] = React.useState([]);
+
   const handleMessage = () => {
     setState({
       open: true,
@@ -58,6 +60,13 @@ export default function Board() {
     setAlertText("留言成功");
     setSeverity("success");
   };
+
+  useEffect(() => {
+    axios.get("api/message").then((response) => {
+      setMessage(response.data.data);
+    });
+  }, []);
+
   return (
     <div>
       <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
@@ -67,41 +76,6 @@ export default function Board() {
           </IconButton>
         </Link>
       </Box>
-      <Paper
-        sx={{
-          p: 2,
-          margin: "auto",
-          maxWidth: 600,
-          maxHeight: 800,
-          marginTop: "2vh",
-          flexGrow: 1,
-          overflow: "scroll",
-          backgroundColor: (theme) =>
-            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-        }}
-      >
-        <Box sx={{ m: 1 }}>
-          <Typography
-            gutterBottom
-            variant="h5"
-            fontWeight={700}
-            component="div"
-          >
-            這裡是留言板
-          </Typography>
-          <Divider />
-          <Box sx={{ m: "8px" }}>
-            <Box container wrap="nowrap" spacing={2} display="flex">
-              <Box>
-                <Avatar />
-              </Box>
-              <Box sx={{ m: "auto 16px" }}>
-                <Typography variant="h7">{message}</Typography>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Paper>
       <Paper
         sx={{
           p: 2,
@@ -124,7 +98,9 @@ export default function Board() {
           </Typography>
         </Box>
         <Box display="flex">
-          <Typography sx={{ width: "58px", p: 1 }}>留言：</Typography>
+          <Typography sx={{ width: "58px", p: 1 }} variant="h7">
+            留言：
+          </Typography>
           <TextField
             size="small"
             sx={{ width: "30vw" }}
@@ -147,6 +123,59 @@ export default function Board() {
               </Typography>
             </Button>
           </ThemeProvider>
+        </Box>
+      </Paper>
+      <Paper
+        sx={{
+          p: 2,
+          margin: "auto",
+          maxWidth: 600,
+          marginTop: "2vh",
+          flexGrow: 1,
+        }}
+      >
+        <Box sx={{ m: 1 }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            fontWeight={700}
+            component="div"
+          >
+            這裡是留言板
+          </Typography>
+          <Divider />
+          <Box sx={{ m: "8px" }}>
+            {message.map((a) => (
+              <Paper
+                display="flex"
+                sx={{ width: "100%", m: "16px auto", bgcolor: "gray" }}
+              >
+                <Box display="flex">
+                  <Avatar sx={{ m: 2, width: "50px", height: "50px" }}>
+                    {a.owner}
+                  </Avatar>
+                  <Box sx={{ m: 2, p: 2, width: "200px" }}>{a.content}</Box>
+                  <Box
+                    sx={{
+                      m: 2,
+                      width: "auto",
+                      height: "",
+                      margin: "auto",
+                    }}
+                  >
+                    <Typography variant="h7">
+                      {a.createdAt.split(/[T.]/)[0]}
+                      {""}
+                      {a.createdAt.split(/[T.]/)[1]}
+                    </Typography>
+                  </Box>
+                  <IconButton sx={{ width: "30px", height: "30px", m: "auto" }}>
+                    <ModeEditIcon />
+                  </IconButton>
+                </Box>
+              </Paper>
+            ))}
+          </Box>
         </Box>
       </Paper>
       <Snackbar

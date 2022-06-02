@@ -19,6 +19,7 @@ import MuiAlert from "@mui/material/Alert";
 import { styled } from "@mui/material/styles";
 import HaHa from "../Photos/laugh.jpg";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BYE from "../Photos/image.gif";
 
 const theme = createTheme({
   palette: {
@@ -71,9 +72,13 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function ButtonAppBar(props) {
   const [open, setOpen] = React.useState(false);
-  const [LoginName, setLoginName] = React.useState("登入");
+  const [who, setWho] = React.useState("Corbin");
+  const [LoginName, setLoginName] = React.useState(
+    localStorage.getItem("login_token") ? "登出" : "登入"
+  );
   const [icon, setIcon] = React.useState(<LoginIcon />);
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const [hidden, setHidden] = React.useState(true);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -98,15 +103,14 @@ export default function ButtonAppBar(props) {
   const Img = styled("img")({
     margin: "auto",
     display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
+    maxWidth: "60%",
+    maxHeight: "60%",
   });
   const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
 
   const HandleLogin = async (event) => {
-    let check = false;
-    console.log(username);
+    let Login = false;
     event.preventDefault();
     await axios
       .post("api/login", {
@@ -114,8 +118,9 @@ export default function ButtonAppBar(props) {
         password: password,
       })
       .then((response) => {
+        Login = true;
         console.log(response);
-        check = true;
+        localStorage.setItem("login_token", response["data"]["token"]);
       })
       .catch((error) => {});
     setState({
@@ -125,16 +130,21 @@ export default function ButtonAppBar(props) {
         horizontal: "center", //position of popout
       },
     });
-    if (check === true) {
+    if (Login === true) {
       setAlertText(username + "登入成功，快去留言唄");
       setSeverity("success");
       setLoginName("登出");
+      setWho("你好！" + username);
       setIcon(<LogoutIcon />);
+      setOpen(false);
+      setHidden(false);
     } else {
-      setAlertText("登入失敗QAQ");
+      setAlertText("登入失敗，再試一次");
       setSeverity("error");
+      setOpen(false);
     }
   };
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -143,14 +153,17 @@ export default function ButtonAppBar(props) {
     const password = e.target.value;
     setPassword(password);
   };
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const guestLogin = () => {
     console.log("wee");
   };
-
+  const handleLogout = () => {
+    console.log("7414");
+    localStorage.removeItem("login_token");
+    window.location.reload(false);
+  };
   return (
     <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 1 }}>
       <ThemeProvider theme={theme}>
@@ -162,7 +175,7 @@ export default function ButtonAppBar(props) {
               sx={{ flexGrow: 1, fontWeight: 600 }}
               color="White"
             >
-              Corbin
+              {who}
             </Typography>
             <Button
               variant="outlined"
@@ -217,163 +230,195 @@ export default function ButtonAppBar(props) {
             <CloseIcon fontSize="small" />
           </IconButton>
         </div>
-        <Box sx={{ width: "100%" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs value={value} onChange={handleChange}>
-              <Tab label="登入" {...a11yProps(0)} />
-              <Tab label="訪客登入" {...a11yProps(1)} />
-            </Tabs>
-          </Box>
-          <TabPanel value={value} index={0}>
-            <Box sx={{ display: "flex" }}>
-              <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
-                帳號Account ：
-              </Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ mt: 1 }}
-                placeholder="請輸入帳號"
-                onChange={onChangeUsername}
-              />
+        {!hidden ? (
+          <Box sx={{ width: "300px", height: "220px" }}>
+            <Box sx={{ margin: "8px auto" }}>
+              <Img src={BYE} />
             </Box>
-            <Box sx={{ display: "flex" }}>
-              <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
-                密碼Password ：
-              </Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ mt: 1 }}
-                placeholder="請輸入密碼"
-                y
-                onChange={onChangePassword}
-                type="password"
-              />
-            </Box>
-            <Box sx={{ marginLeft: "16px", width: "180px" }}>
-              <Link href="/Register">
-                <ThemeProvider theme={theme}>
+            <Box
+              sx={{
+                width: "200px",
+                margin: "16px auto",
+                padding: "auto",
+              }}
+            >
+              <ThemeProvider theme={theme}>
+                <Button
+                  variant="contained"
+                  color="Button"
+                  sx={{ width: "200px", marginBottom: "16px" }}
+                  onClick={handleLogout}
+                >
                   <Typography
-                    color="gray"
-                    sx={{ marginTop: "8px", width: "180px" }}
+                    variant="h7"
+                    sx={{ fontWeight: 700 }}
+                    color="White"
                   >
-                    沒有帳號嗎？辦一個吧！
+                    我要登出
                   </Typography>
-                </ThemeProvider>
-              </Link>
-              <Box display="flex" sx={{ width: "380px", marginTop: "16px" }}>
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="Button"
-                    sx={{
-                      minHeight: "34px",
-                      minWidth: "180px",
-                      maxHeight: "34px",
-                      maxWidth: "180px",
-                      margin: "auto",
-                      marginLeft: 0,
-                    }}
-                    onClick={HandleLogin}
-                  >
-                    <Typography variant="body2" color="White">
-                      登入
-                    </Typography>
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="Button"
-                    sx={{
-                      minHeight: "34px",
-                      minWidth: "180px",
-                      maxHeight: "34px",
-                      maxWidth: "180px",
-                      margin: "auto",
-                    }}
-                    onClick={handlecloseDia}
-                  >
-                    <Typography variant="body2">取消</Typography>
-                  </Button>
-                </ThemeProvider>
-              </Box>
+                </Button>
+              </ThemeProvider>
             </Box>
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <Box>
-              <Box>
-                <Typography variant="h7" sx={{ fontWeight: 700 }}>
-                  你484懶得辦帳號？那就用訪客來登入留言唄~
+          </Box>
+        ) : (
+          <Box sx={{ width: "100%" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs value={value} onChange={handleChange}>
+                <Tab label="登入" {...a11yProps(0)} />
+                <Tab label="訪客登入" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <Box sx={{ display: "flex" }}>
+                <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
+                  帳號Account ：
                 </Typography>
-                <Img
-                  src={HaHa}
-                  sx={{ marginTop: "8px", width: "200px", height: "100px" }}
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  sx={{ mt: 1 }}
+                  placeholder="請輸入帳號"
+                  onChange={onChangeUsername}
                 />
+              </Box>
+              <Box sx={{ display: "flex" }}>
+                <Typography sx={{ p: 2, width: "130px", fontWeight: 700 }}>
+                  密碼Password ：
+                </Typography>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  sx={{ mt: 1 }}
+                  placeholder="請輸入密碼"
+                  y
+                  onChange={onChangePassword}
+                  type="password"
+                />
+              </Box>
+              <Box sx={{ marginLeft: "16px", width: "180px" }}>
                 <Link href="/Register">
                   <ThemeProvider theme={theme}>
                     <Typography
                       color="gray"
-                      sx={{ marginTop: "8px", width: "220px" }}
+                      sx={{ marginTop: "8px", width: "180px" }}
                     >
-                      回心轉意了嗎？辦一個吧！
+                      沒有帳號嗎？辦一個吧！
                     </Typography>
                   </ThemeProvider>
                 </Link>
+                <Box display="flex" sx={{ width: "380px", marginTop: "16px" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      variant="contained"
+                      color="Button"
+                      sx={{
+                        minHeight: "34px",
+                        minWidth: "180px",
+                        maxHeight: "34px",
+                        maxWidth: "180px",
+                        margin: "auto",
+                        marginLeft: 0,
+                      }}
+                      onClick={HandleLogin}
+                    >
+                      <Typography variant="body2" color="White">
+                        登入
+                      </Typography>
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="Button"
+                      sx={{
+                        minHeight: "34px",
+                        minWidth: "180px",
+                        maxHeight: "34px",
+                        maxWidth: "180px",
+                        margin: "auto",
+                      }}
+                      onClick={handlecloseDia}
+                    >
+                      <Typography variant="body2">取消</Typography>
+                    </Button>
+                  </ThemeProvider>
+                </Box>
               </Box>
-              <Box display="flex" sx={{ width: "380px", marginTop: "16px" }}>
-                <ThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="Button"
-                    sx={{
-                      minHeight: "34px",
-                      minWidth: "180px",
-                      maxHeight: "34px",
-                      maxWidth: "180px",
-                      margin: "auto",
-                      marginLeft: 0,
-                    }}
-                    onClick={guestLogin}
-                  >
-                    <Typography variant="body2" color="White">
-                      訪客登入
-                    </Typography>
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="Button"
-                    sx={{
-                      minHeight: "34px",
-                      minWidth: "180px",
-                      maxHeight: "34px",
-                      maxWidth: "180px",
-                      margin: "auto",
-                    }}
-                    onClick={handlecloseDia}
-                  >
-                    <Typography variant="body2">取消</Typography>
-                  </Button>
-                </ThemeProvider>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Box>
+                <Box>
+                  <Typography variant="h7" sx={{ fontWeight: 700 }}>
+                    你484懶得辦帳號？那就用訪客來登入留言唄~
+                  </Typography>
+                  <Img
+                    src={HaHa}
+                    sx={{ marginTop: "8px", width: "200px", height: "100px" }}
+                  />
+                  <Link href="/Register">
+                    <ThemeProvider theme={theme}>
+                      <Typography
+                        color="gray"
+                        sx={{ marginTop: "8px", width: "220px" }}
+                      >
+                        回心轉意了嗎？辦一個吧！
+                      </Typography>
+                    </ThemeProvider>
+                  </Link>
+                </Box>
+                <Box display="flex" sx={{ width: "380px", marginTop: "16px" }}>
+                  <ThemeProvider theme={theme}>
+                    <Button
+                      variant="contained"
+                      color="Button"
+                      sx={{
+                        minHeight: "34px",
+                        minWidth: "180px",
+                        maxHeight: "34px",
+                        maxWidth: "180px",
+                        margin: "auto",
+                        marginLeft: 0,
+                      }}
+                      onClick={guestLogin}
+                    >
+                      <Typography variant="body2" color="White">
+                        訪客登入
+                      </Typography>
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      color="Button"
+                      sx={{
+                        minHeight: "34px",
+                        minWidth: "180px",
+                        maxHeight: "34px",
+                        maxWidth: "180px",
+                        margin: "auto",
+                      }}
+                      onClick={handlecloseDia}
+                    >
+                      <Typography variant="body2">取消</Typography>
+                    </Button>
+                  </ThemeProvider>
+                </Box>
               </Box>
-            </Box>
-          </TabPanel>
-        </Box>
-        <Snackbar
-          anchorOrigin={{ vertical, horizontal }}
-          open={openSnack}
-          autoHideDuration={1500}
-          onClose={handleCloseSnack}
-          key={vertical + horizontal}
-        >
-          <Alert
-            onClose={handleCloseSnack}
-            severity={Severity}
-            sx={{ width: "100%" }}
-          >
-            {AlertText}
-          </Alert>
-        </Snackbar>
+            </TabPanel>
+          </Box>
+        )}
       </Dialog>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={openSnack}
+        autoHideDuration={1500}
+        onClose={handleCloseSnack}
+        key={vertical + horizontal}
+      >
+        <Alert
+          onClose={handleCloseSnack}
+          severity={Severity}
+          sx={{ width: "100%" }}
+        >
+          {AlertText}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
