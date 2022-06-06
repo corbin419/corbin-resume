@@ -81,6 +81,9 @@ export default function Register() {
     if (check === true) {
       setAlertText(username + "註冊成功，快去登入唄");
       setSeverity("success");
+      setTimeout(() => {
+        window.location.reload(false);
+      }, "1000");
     } else {
       setAlertText("註冊失敗QAQ");
       setSeverity("error");

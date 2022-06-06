@@ -16,7 +16,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useEffect } from "react";
 import axios from "../Axios.config";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import Edit from "../Componments/EditBtn";
+import Delete from "../Componments/DeleteBtn";
 
 const theme = createTheme({
   palette: {
@@ -48,8 +49,26 @@ export default function Board() {
     setState({ ...state, open: false });
   };
   const [message, setMessage] = React.useState([]);
+  const [messageContent, setMessageContent] = React.useState("");
 
-  const handleMessage = () => {
+  const handleMessage = async () => {
+    let check_message = false;
+    await axios
+      .post(
+        "api/message",
+        {
+          content: messageContent,
+        },
+        { headers: { token: localStorage.getItem("login_token") } }
+      )
+      .then((Response) => {
+        console.log(Response);
+        check_message = true;
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+
     setState({
       open: true,
       ...{
@@ -57,8 +76,16 @@ export default function Board() {
         horizontal: "center", //position of popout
       },
     });
-    setAlertText("留言成功");
-    setSeverity("success");
+    if (check_message === true) {
+      setAlertText("留言成功");
+      setSeverity("success");
+      setTimeout(() => {
+        window.location.reload(false);
+      }, "1500");
+    } else {
+      setAlertText("留言失敗QAQ");
+      setSeverity("error");
+    }
   };
 
   useEffect(() => {
@@ -66,6 +93,11 @@ export default function Board() {
       setMessage(response.data.data);
     });
   }, []);
+
+  const handleTextareaChange = (e) => {
+    const messageContent = e.target.value;
+    setMessageContent(messageContent);
+  };
 
   return (
     <div>
@@ -83,8 +115,6 @@ export default function Board() {
           maxWidth: 600,
           marginTop: "2vh",
           flexGrow: 1,
-          backgroundColor: (theme) =>
-            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         }}
       >
         <Box sx={{ m: 1 }}>
@@ -105,6 +135,8 @@ export default function Board() {
             size="small"
             sx={{ width: "30vw" }}
             placeholder="你想說點啥？"
+            value={messageContent}
+            onChange={handleTextareaChange}
           />
           <ThemeProvider theme={theme}>
             <Button
@@ -145,33 +177,43 @@ export default function Board() {
           </Typography>
           <Divider />
           <Box sx={{ m: "8px" }}>
-            {message.map((a) => (
+            {message.map((a, index) => (
               <Paper
                 display="flex"
-                sx={{ width: "100%", m: "16px auto", bgcolor: "gray" }}
+                sx={{
+                  width: "100%",
+                  m: "16px auto",
+                  bgcolor: "#8ca6c0",
+                }}
+                key={index}
               >
                 <Box display="flex">
-                  <Avatar sx={{ m: 2, width: "50px", height: "50px" }}>
-                    {a.owner}
-                  </Avatar>
-                  <Box sx={{ m: 2, p: 2, width: "200px" }}>{a.content}</Box>
-                  <Box
-                    sx={{
-                      m: 2,
-                      width: "auto",
-                      height: "",
-                      margin: "auto",
-                    }}
-                  >
-                    <Typography variant="h7">
-                      {a.createdAt.split(/[T.]/)[0]}
-                      {""}
-                      {a.createdAt.split(/[T.]/)[1]}
-                    </Typography>
+                  <Box sx={{ m: "auto", width: "50px", height: "50px" }}>
+                    <Avatar sx={{ width: "50px", height: "50px" }}>
+                      {a.owner}
+                    </Avatar>
                   </Box>
-                  <IconButton sx={{ width: "30px", height: "30px", m: "auto" }}>
-                    <ModeEditIcon />
-                  </IconButton>
+                  <Box>
+                    <Box sx={{ m: 2, p: 2, width: "420px" }} display="flex">
+                      <Box sx={{ width: "350px" }}>{a.content}</Box>
+                      <Box sx={{ m: "auto", height: "30px" }} display="flex">
+                        <Edit newmessage={a.content} />
+                        <Delete id={a.id} />
+                      </Box>
+                    </Box>
+                    <Box
+                      sx={{
+                        width: "150px",
+                        marginLeft: "330px",
+                        p: 0.5,
+                      }}
+                    >
+                      <Typography variant="body2">
+                        {a.createdAt.split(/[T.]/)[0]}
+                        {a.createdAt.split(/[T.]/)[1]}
+                      </Typography>
+                    </Box>
+                  </Box>
                 </Box>
               </Paper>
             ))}

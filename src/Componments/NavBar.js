@@ -110,19 +110,21 @@ export default function ButtonAppBar(props) {
   const [password, setPassword] = React.useState();
 
   const HandleLogin = async (event) => {
-    let Login = false;
     event.preventDefault();
+    let login = false;
     await axios
       .post("api/login", {
         username: username,
         password: password,
       })
       .then((response) => {
-        Login = true;
+        login = true;
         console.log(response);
         localStorage.setItem("login_token", response["data"]["token"]);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error.response);
+      });
     setState({
       openSnack: true,
       ...{
@@ -130,7 +132,7 @@ export default function ButtonAppBar(props) {
         horizontal: "center", //position of popout
       },
     });
-    if (Login === true) {
+    if (login === true) {
       setAlertText(username + "登入成功，快去留言唄");
       setSeverity("success");
       setLoginName("登出");
@@ -144,6 +146,12 @@ export default function ButtonAppBar(props) {
       setOpen(false);
     }
   };
+
+  React.useEffect(() => {
+    if(localStorage.getItem("login_token")){
+      setHidden(false);
+    }
+  }, []);
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
