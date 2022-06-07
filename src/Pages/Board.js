@@ -6,7 +6,6 @@ import {
   Typography,
   Button,
   Divider,
-  IconButton,
   Link,
   Snackbar,
   Avatar,
@@ -104,10 +103,15 @@ export default function Board(props) {
   return (
     <div>
       <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
-        <Link href="/">
-          <IconButton>
-            <ArrowBackIosNewIcon fontSize="large" />
-          </IconButton>
+        <Link href="/" underline="none">
+          <ThemeProvider theme={theme}>
+            <Button color="Button">
+              <ArrowBackIosNewIcon fontSize="large" />
+              <Typography variant="h6" fontWeight="700">
+                回履歷
+              </Typography>
+            </Button>
+          </ThemeProvider>
         </Link>
       </Box>
       <Paper
@@ -163,9 +167,10 @@ export default function Board(props) {
         sx={{
           p: 2,
           margin: "auto",
-          maxWidth: 600,
+          maxWidth: "80%",
           marginTop: "2vh",
           flexCollapse: 1,
+          bgcolor: "#DDDCD7",
         }}
       >
         <Box sx={{ m: 1 }}>
@@ -187,19 +192,31 @@ export default function Board(props) {
                     sx={{
                       width: "100%",
                       m: "16px auto",
-                      bgcolor: "#8ca6c0",
+                      bgcolor: "#7D8CA3 ",
                     }}
                     key={index}
                   >
                     <Box display="flex">
-                      <Box sx={{ m: "auto", width: "50px", height: "50px" }}>
-                        <Avatar sx={{ width: "50px", height: "50px" }}>
+                      <Box
+                        sx={{
+                          m: "auto 2vw",
+                          width: "50px",
+                          height: "50px",
+                        }}
+                      >
+                        <Avatar
+                          sx={{
+                            width: "50px",
+                            height: "50px",
+                            bgcolor: "#1E1E1E",
+                          }}
+                        >
                           {a.owner}
                         </Avatar>
                       </Box>
-                      <Box>
-                        <Box sx={{ m: 2, p: 2, width: "420px" }} display="flex">
-                          <Box sx={{ width: "350px" }}>{a.content}</Box>
+                      <Box sx={{ width: "90%" }}>
+                        <Box sx={{ m: 2, p: 2, width: "90%" }} display="flex">
+                          <Box sx={{ width: "80%" }}>{a.content}</Box>
                           {localStorage.getItem("username") !==
                           a.owner ? null : (
                             <Box
@@ -216,18 +233,19 @@ export default function Board(props) {
                             </Box>
                           )}
                         </Box>
-                        <Box
-                          sx={{
-                            width: "150px",
-                            marginLeft: "330px",
-                            p: 0.5,
-                          }}
-                        >
-                          <Typography variant="body2">
-                            {a.createdAt.split(/[T.]/)[0]}
-                            {a.createdAt.split(/[T.]/)[1]}
-                          </Typography>
-                        </Box>
+                      </Box>
+                      <Box
+                        sx={{
+                          width: "15%",
+                          p: 0.5,
+                          mt: "50px",
+                          pt: "10px",
+                        }}
+                      >
+                        <Typography variant="body2">
+                          {a.createdAt.split(/[T.]/)[0]}
+                          {a.createdAt.split(/[T.]/)[1]}
+                        </Typography>
                       </Box>
                     </Box>
                   </Paper>

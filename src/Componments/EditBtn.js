@@ -71,25 +71,26 @@ export default function EditBtn(props) {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <Box sx={{ width: "200px", height: "150px" }}>
+        <Box sx={{ width: "400px", height: "150px" }}>
           <Box sx={{ textAlign: "center", p: "8px" }}>
             <Typography variant="h7">編輯留言</Typography>
           </Box>
-          <Box sx={{ width: "80%", m: "8px auto" }}>
+          <Box sx={{ width: "90%", m: "8px auto" }}>
             <TextField
               placeholder={newmessage}
               size="small"
               value={newmessageContent}
               onChange={handleTextareaChange}
+              fullWidth
             />
           </Box>
-          <Box display="flex" sx={{ m: 2 }}>
+          <Box display="flex" sx={{ m: "auto", width: "200px" }}>
             <ThemeProvider theme={theme}>
               <Button
                 color="Button"
                 variant="contained"
-                sx={{ ml: "16px" }}
                 onClick={handleEdit}
+                sx={{ m: "auto", minWidth: "80px" }}
               >
                 <Typography variant="h7" color="White">
                   送出
@@ -98,8 +99,8 @@ export default function EditBtn(props) {
               <Button
                 color="Button"
                 variant="outlined"
-                sx={{ ml: "8px" }}
                 onClick={handleClose}
+                sx={{ m: "auto", minWidth: "80px" }}
               >
                 <Typography variant="h7">取消</Typography>
               </Button>

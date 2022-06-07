@@ -29,9 +29,6 @@ const theme = createTheme({
     Button: {
       main: "#363F4E",
     },
-    Log: {
-      main: "#5CB4FD",
-    },
   },
 });
 function TabPanel(props) {
@@ -122,6 +119,7 @@ export default function ButtonAppBar(props) {
         console.log(response);
         localStorage.setItem("login_token", response["data"]["token"]);
         localStorage.setItem("username", response["data"]["username"]);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error.response);
@@ -134,14 +132,13 @@ export default function ButtonAppBar(props) {
       },
     });
     if (login === true) {
+      setOpen(false);
       setHidden(false);
       setAlertText(username + "登入成功，快去留言唄");
       setSeverity("success");
       setLoginName("登出");
       setWho("你是" + username + "你好啊");
       setIcon(<LogoutIcon />);
-
-      setOpen(false);
     } else {
       setAlertText("登入失敗，再試一次");
       setSeverity("error");
@@ -152,6 +149,13 @@ export default function ButtonAppBar(props) {
   React.useEffect(() => {
     if (localStorage.getItem("login_token")) {
       setHidden(false);
+    } else {
+      setHidden(true);
+    }
+    if (localStorage.getItem("username")) {
+      setWho("你是" + localStorage.getItem("username"));
+    } else {
+      setWho("");
     }
   }, []);
 
@@ -188,14 +192,14 @@ export default function ButtonAppBar(props) {
             >
               紀元翔-履歷
             </Typography>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{ flexGrow: 1, fontWeight: 600 }}
-              color="White"
-            >
-              {who}
-            </Typography>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, fontWeight: 600, ml: "10vw" }}
+                color="White"
+              >
+                {who}
+              </Typography>
             <Button
               variant="outlined"
               color="white"

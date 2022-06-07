@@ -118,10 +118,15 @@ export default function Register() {
   return (
     <div>
       <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
-        <Link href="/">
-          <IconButton>
-            <ArrowBackIosNewIcon fontSize="large" />
-          </IconButton>
+        <Link href="/" underline="none">
+          <ThemeProvider theme={theme}>
+            <Button color="Button">
+              <ArrowBackIosNewIcon fontSize="large" />
+              <Typography variant="h6" fontWeight="700">
+                回履歷
+              </Typography>
+            </Button>
+          </ThemeProvider>
         </Link>
       </Box>
       <Paper
