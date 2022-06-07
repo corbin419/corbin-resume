@@ -55,13 +55,17 @@ export default function Board(props) {
 
   const handleMessage = async () => {
     let check_message = false;
+    let header = {};
+    if (localStorage.getItem("login_token")) {
+      header = { token: localStorage.getItem("login_token") };
+    }
     await axios
       .post(
         "api/message",
         {
           content: messageContent,
         },
-        { headers: { token: localStorage.getItem("login_token") } }
+        { headers: header }
       )
       .then((Response) => {
         console.log(Response);

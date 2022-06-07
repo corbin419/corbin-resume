@@ -172,6 +172,10 @@ export default function ButtonAppBar(props) {
   };
   const guestLogin = () => {
     console.log("wee");
+    setOpen(false);
+    setWho("你是Guest");
+    setHidden(false);
+    setLoginName("登出");
   };
   const handleLogout = () => {
     console.log("7414");
@@ -192,14 +196,14 @@ export default function ButtonAppBar(props) {
             >
               紀元翔-履歷
             </Typography>
-              <Typography
-                variant="h6"
-                component="div"
-                sx={{ flexGrow: 1, fontWeight: 600, ml: "10vw" }}
-                color="White"
-              >
-                {who}
-              </Typography>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, fontWeight: 600, ml: "10vw" }}
+              color="White"
+            >
+              {who}
+            </Typography>
             <Button
               variant="outlined"
               color="white"
