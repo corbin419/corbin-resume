@@ -36,12 +36,15 @@ export default function EditBtn(props) {
       })
       .then((response) => {
         console.log(response);
+        props.setU(!props.U);
+        setOpen(false);
       })
       .catch((error) => {
         console.log(error.response.data["message"]);
       });
     console.log("c8 c8");
   };
+
   return (
     <Box>
       <IconButton onClick={handleClickOpen}>

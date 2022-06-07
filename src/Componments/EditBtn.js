@@ -10,9 +10,10 @@ import {
 import { createTheme } from "@mui/material/styles";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
 import "../App.css";
 import { ThemeProvider } from "@emotion/react";
+import axios from "../Axios.config";
+
 const theme = createTheme({
   palette: {
     white: {
@@ -29,12 +30,35 @@ const theme = createTheme({
 export default function EditBtn(props) {
   const [open, setOpen] = React.useState(false);
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const { newmessage, Send } = props;
+  const { newmessage } = props;
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleEdit = async () => {
+    console.log(newmessageContent);
+    await axios
+      .put(
+        "api/message",
+        {
+          id: props.id,
+          content: newmessageContent,
+        },
+        { headers: { token: localStorage.getItem("login_token") } }
+      )
+      .then((response) => {
+        console.log(response);
+        props.setU(!props.U);
+        setOpen(false);
+      });
+  };
+  const [newmessageContent, setNewMessageContent] = React.useState("");
+
+  const handleTextareaChange = (e) => {
+    const newmessageContent = e.target.value;
+    setNewMessageContent(newmessageContent);
   };
   return (
     <Box>
@@ -52,7 +76,12 @@ export default function EditBtn(props) {
             <Typography variant="h7">編輯留言</Typography>
           </Box>
           <Box sx={{ width: "80%", m: "8px auto" }}>
-            <TextField placeholder={newmessage} size="small" />
+            <TextField
+              placeholder={newmessage}
+              size="small"
+              value={newmessageContent}
+              onChange={handleTextareaChange}
+            />
           </Box>
           <Box display="flex" sx={{ m: 2 }}>
             <ThemeProvider theme={theme}>
@@ -60,7 +89,7 @@ export default function EditBtn(props) {
                 color="Button"
                 variant="contained"
                 sx={{ ml: "16px" }}
-                onClick={Send}
+                onClick={handleEdit}
               >
                 <Typography variant="h7" color="White">
                   送出

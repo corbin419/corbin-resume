@@ -10,6 +10,7 @@ import {
   Link,
   Snackbar,
   Avatar,
+  Collapse,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -18,6 +19,7 @@ import { useEffect } from "react";
 import axios from "../Axios.config";
 import Edit from "../Componments/EditBtn";
 import Delete from "../Componments/DeleteBtn";
+import { TransitionGroup } from "react-transition-group";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +37,7 @@ const theme = createTheme({
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-export default function Board() {
+export default function Board(props) {
   const [AlertText, setAlertText] = React.useState("");
   const [Severity, setSeverity] = React.useState("");
   const [state, setState] = React.useState({
@@ -50,6 +52,7 @@ export default function Board() {
   };
   const [message, setMessage] = React.useState([]);
   const [messageContent, setMessageContent] = React.useState("");
+  const [U, setU] = React.useState(false);
 
   const handleMessage = async () => {
     let check_message = false;
@@ -79,11 +82,10 @@ export default function Board() {
     if (check_message === true) {
       setAlertText("留言成功");
       setSeverity("success");
-      setTimeout(() => {
-        window.location.reload(false);
-      }, "1500");
+      setU(!U);
+      setMessageContent("");
     } else {
-      setAlertText("留言失敗QAQ");
+      setAlertText("留言失敗XD 登入一下或不要啥都不說");
       setSeverity("error");
     }
   };
@@ -92,7 +94,7 @@ export default function Board() {
     axios.get("api/message").then((response) => {
       setMessage(response.data.data);
     });
-  }, []);
+  }, [U]);
 
   const handleTextareaChange = (e) => {
     const messageContent = e.target.value;
@@ -114,7 +116,7 @@ export default function Board() {
           margin: "auto",
           maxWidth: 600,
           marginTop: "2vh",
-          flexGrow: 1,
+          flexCollapse: 1,
         }}
       >
         <Box sx={{ m: 1 }}>
@@ -163,7 +165,7 @@ export default function Board() {
           margin: "auto",
           maxWidth: 600,
           marginTop: "2vh",
-          flexGrow: 1,
+          flexCollapse: 1,
         }}
       >
         <Box sx={{ m: 1 }}>
@@ -177,46 +179,61 @@ export default function Board() {
           </Typography>
           <Divider />
           <Box sx={{ m: "8px" }}>
-            {message.map((a, index) => (
-              <Paper
-                display="flex"
-                sx={{
-                  width: "100%",
-                  m: "16px auto",
-                  bgcolor: "#8ca6c0",
-                }}
-                key={index}
-              >
-                <Box display="flex">
-                  <Box sx={{ m: "auto", width: "50px", height: "50px" }}>
-                    <Avatar sx={{ width: "50px", height: "50px" }}>
-                      {a.owner}
-                    </Avatar>
-                  </Box>
-                  <Box>
-                    <Box sx={{ m: 2, p: 2, width: "420px" }} display="flex">
-                      <Box sx={{ width: "350px" }}>{a.content}</Box>
-                      <Box sx={{ m: "auto", height: "30px" }} display="flex">
-                        <Edit newmessage={a.content} />
-                        <Delete id={a.id} />
+            <TransitionGroup>
+              {message.map((a, index) => (
+                <Collapse key={index} timeout={800}>
+                  <Paper
+                    display="flex"
+                    sx={{
+                      width: "100%",
+                      m: "16px auto",
+                      bgcolor: "#8ca6c0",
+                    }}
+                    key={index}
+                  >
+                    <Box display="flex">
+                      <Box sx={{ m: "auto", width: "50px", height: "50px" }}>
+                        <Avatar sx={{ width: "50px", height: "50px" }}>
+                          {a.owner}
+                        </Avatar>
+                      </Box>
+                      <Box>
+                        <Box sx={{ m: 2, p: 2, width: "420px" }} display="flex">
+                          <Box sx={{ width: "350px" }}>{a.content}</Box>
+                          {localStorage.getItem("username") !==
+                          a.owner ? null : (
+                            <Box
+                              sx={{ m: "auto", height: "30px" }}
+                              display="flex"
+                            >
+                              <Edit
+                                newmessage={a.content}
+                                id={a.id}
+                                U={U}
+                                setU={setU}
+                              />
+                              <Delete id={a.id} U={U} setU={setU} />
+                            </Box>
+                          )}
+                        </Box>
+                        <Box
+                          sx={{
+                            width: "150px",
+                            marginLeft: "330px",
+                            p: 0.5,
+                          }}
+                        >
+                          <Typography variant="body2">
+                            {a.createdAt.split(/[T.]/)[0]}
+                            {a.createdAt.split(/[T.]/)[1]}
+                          </Typography>
+                        </Box>
                       </Box>
                     </Box>
-                    <Box
-                      sx={{
-                        width: "150px",
-                        marginLeft: "330px",
-                        p: 0.5,
-                      }}
-                    >
-                      <Typography variant="body2">
-                        {a.createdAt.split(/[T.]/)[0]}
-                        {a.createdAt.split(/[T.]/)[1]}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </Paper>
-            ))}
+                  </Paper>
+                </Collapse>
+              ))}
+            </TransitionGroup>
           </Box>
         </Box>
       </Paper>

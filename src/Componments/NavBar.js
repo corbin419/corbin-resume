@@ -71,8 +71,9 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 });
 
 export default function ButtonAppBar(props) {
+  const [username, setUsername] = React.useState();
   const [open, setOpen] = React.useState(false);
-  const [who, setWho] = React.useState("Corbin");
+  const [who, setWho] = React.useState(username);
   const [LoginName, setLoginName] = React.useState(
     localStorage.getItem("login_token") ? "登出" : "登入"
   );
@@ -106,7 +107,6 @@ export default function ButtonAppBar(props) {
     maxWidth: "60%",
     maxHeight: "60%",
   });
-  const [username, setUsername] = React.useState();
   const [password, setPassword] = React.useState();
 
   const HandleLogin = async (event) => {
@@ -121,6 +121,7 @@ export default function ButtonAppBar(props) {
         login = true;
         console.log(response);
         localStorage.setItem("login_token", response["data"]["token"]);
+        localStorage.setItem("username", response["data"]["username"]);
       })
       .catch((error) => {
         console.log(error.response);
@@ -133,13 +134,14 @@ export default function ButtonAppBar(props) {
       },
     });
     if (login === true) {
+      setHidden(false);
       setAlertText(username + "登入成功，快去留言唄");
       setSeverity("success");
       setLoginName("登出");
-      setWho("你好！" + username);
+      setWho("你是" + username + "你好啊");
       setIcon(<LogoutIcon />);
+
       setOpen(false);
-      setHidden(false);
     } else {
       setAlertText("登入失敗，再試一次");
       setSeverity("error");
@@ -148,7 +150,7 @@ export default function ButtonAppBar(props) {
   };
 
   React.useEffect(() => {
-    if(localStorage.getItem("login_token")){
+    if (localStorage.getItem("login_token")) {
       setHidden(false);
     }
   }, []);
@@ -170,6 +172,7 @@ export default function ButtonAppBar(props) {
   const handleLogout = () => {
     console.log("7414");
     localStorage.removeItem("login_token");
+    localStorage.removeItem("username");
     window.location.reload(false);
   };
   return (
@@ -177,6 +180,14 @@ export default function ButtonAppBar(props) {
       <ThemeProvider theme={theme}>
         <AppBar position="static" color="Button">
           <Toolbar>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, fontWeight: 600 }}
+              color="White"
+            >
+              紀元翔-履歷
+            </Typography>
             <Typography
               variant="h6"
               component="div"
