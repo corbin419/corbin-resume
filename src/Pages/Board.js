@@ -10,6 +10,8 @@ import {
   Snackbar,
   Avatar,
   Collapse,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -18,6 +20,7 @@ import { useEffect } from "react";
 import axios from "../Axios.config";
 import Edit from "../Componments/EditBtn";
 import Delete from "../Componments/DeleteBtn";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { TransitionGroup } from "react-transition-group";
 
 const theme = createTheme({
@@ -52,6 +55,10 @@ export default function Board(props) {
   const [message, setMessage] = React.useState([]);
   const [messageContent, setMessageContent] = React.useState("");
   const [U, setU] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [postorsearch, setPostorsearch] = React.useState("留言");
+  const [placeholder, setPlaceholder] = React.useState("你想說點啥？");
+  const openmenu = Boolean(anchorEl);
 
   const handleMessage = async () => {
     let check_message = false;
@@ -103,7 +110,22 @@ export default function Board(props) {
     const messageContent = e.target.value;
     setMessageContent(messageContent);
   };
-
+  const handleOpenList = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const handletoSearch = () => {
+    setPostorsearch("搜尋");
+    setPlaceholder("你想找啥留言？");
+    setAnchorEl(null);
+  };
+  const handletopost = () => {
+    setPostorsearch("留言");
+    setPlaceholder("你想說點啥？");
+    setAnchorEl(null);
+  };
   return (
     <div>
       <Box sx={{ marginTop: "5vh", paddingLeft: "4vw" }}>
@@ -122,12 +144,12 @@ export default function Board(props) {
         sx={{
           p: 2,
           margin: "auto",
-          maxWidth: 600,
+          maxWidth: 700,
           marginTop: "2vh",
           flexCollapse: 1,
         }}
       >
-        <Box sx={{ m: 1 }}>
+        <Box sx={{ m: "auto 24px" }}>
           <Typography
             gutterBottom
             variant="h5"
@@ -137,14 +159,35 @@ export default function Board(props) {
             你可以在這裡講話，但不一定有人理你🤔
           </Typography>
         </Box>
-        <Box display="flex">
-          <Typography sx={{ width: "58px", p: 1 }} variant="h7">
-            留言：
-          </Typography>
+        <Box display="flex" sx={{ m: "auto", width: "650px" }}>
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="outlined"
+              color="Button"
+              sx={{ mr: 1 }}
+              endIcon={<KeyboardArrowDownIcon />}
+              onClick={handleOpenList}
+            >
+              <Typography variant="h7">{postorsearch}</Typography>
+            </Button>
+            <Menu
+              open={openmenu}
+              onClose={handleCloseMenu}
+              anchorEl={anchorEl}
+              sx={{ marginLeft: "8px" }}
+            >
+              <MenuItem onClick={handletopost}>
+                <Typography variant="body2">留言</Typography>
+              </MenuItem>
+              <MenuItem onClick={handletoSearch}>
+                <Typography variant="body2">搜尋</Typography>
+              </MenuItem>
+            </Menu>
+          </ThemeProvider>
           <TextField
             size="small"
             sx={{ width: "30vw" }}
-            placeholder="你想說點啥？"
+            placeholder={placeholder}
             value={messageContent}
             onChange={handleTextareaChange}
           />

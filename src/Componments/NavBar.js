@@ -145,6 +145,12 @@ export default function ButtonAppBar(props) {
       setOpen(false);
     }
   };
+  const guestLogin = () => {
+    setHidden(false);
+    setOpen(false);
+    setWho("你是Guest");
+    setLoginName("登出");
+  };
 
   React.useEffect(() => {
     if (localStorage.getItem("login_token")) {
@@ -169,13 +175,6 @@ export default function ButtonAppBar(props) {
   };
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-  const guestLogin = () => {
-    console.log("wee");
-    setOpen(false);
-    setWho("你是Guest");
-    setHidden(false);
-    setLoginName("登出");
   };
   const handleLogout = () => {
     console.log("7414");
