@@ -59,6 +59,7 @@ export default function Board(props) {
   const [postorsearch, setPostorsearch] = React.useState("留言");
   const [placeholder, setPlaceholder] = React.useState("你想說點啥？");
   const openmenu = Boolean(anchorEl);
+  const [hidden, setHidden] = React.useState(true);
 
   const handleMessage = async () => {
     let check_message = false;
@@ -102,6 +103,13 @@ export default function Board(props) {
 
   useEffect(() => {
     axios.get("api/message").then((response) => {
+      for (let i = 0; i < response.data.data.length; i++) {
+        const time = new Date(response.data.data[i].createdAt).toLocaleString(
+          "zh-TW",
+          { timeZone: "Asia/Taipei" }
+        );
+        response.data.data[i].createdAt = time;
+      }
       setMessage(response.data.data);
     });
   }, [U]);
@@ -119,12 +127,19 @@ export default function Board(props) {
   const handletoSearch = () => {
     setPostorsearch("搜尋");
     setPlaceholder("你想找啥留言？");
+    setHidden(false);
     setAnchorEl(null);
   };
   const handletopost = () => {
     setPostorsearch("留言");
+    setHidden(true);
     setPlaceholder("你想說點啥？");
     setAnchorEl(null);
+  };
+  const handleSearch = () => {
+    // axios.get("api/message").then(response)=()=>{
+    // }
+    console.log("wee")
   };
   return (
     <div>
@@ -191,23 +206,43 @@ export default function Board(props) {
             value={messageContent}
             onChange={handleTextareaChange}
           />
-          <ThemeProvider theme={theme}>
-            <Button
-              variant="contained"
-              color="Button"
-              sx={{
-                marginLeft: "16px",
-                marginTop: "2px",
-                minHeight: "36px",
-                maxHeight: "36px",
-              }}
-              onClick={handleMessage}
-            >
-              <Typography variant="h7" color="White" sx={{ fontWeight: 700 }}>
-                送出
-              </Typography>
-            </Button>
-          </ThemeProvider>
+          {!hidden ? (
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                color="Button"
+                sx={{
+                  marginLeft: "16px",
+                  marginTop: "2px",
+                  minHeight: "36px",
+                  maxHeight: "36px",
+                }}
+                onClick={handleSearch}
+              >
+                <Typography variant="h7" color="White" sx={{ fontWeight: 700 }}>
+                  搜尋
+                </Typography>
+              </Button>
+            </ThemeProvider>
+          ) : (
+            <ThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                color="Button"
+                sx={{
+                  marginLeft: "16px",
+                  marginTop: "2px",
+                  minHeight: "36px",
+                  maxHeight: "36px",
+                }}
+                onClick={handleMessage}
+              >
+                <Typography variant="h7" color="White" sx={{ fontWeight: 700 }}>
+                  送出
+                </Typography>
+              </Button>
+            </ThemeProvider>
+          )}
         </Box>
       </Paper>
       <Paper
